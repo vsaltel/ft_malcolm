@@ -18,6 +18,7 @@ void	recv_arp(t_malcolm *mal)
 	char		buf[BUFSIZE];
 	ssize_t		ret;
 
+	printf("wait to recv\n", ret);
 	ret = recvfrom(mal->sockfd, buf, BUFSIZE, 0, mal->d_addr, &mal->d_addrlen);
 	printf("recv %zu\n", ret);
 }
