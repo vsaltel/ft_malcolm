@@ -16,7 +16,7 @@ void	init_malcolm(t_malcolm *mal)
 	mal->d_maddr = NULL;
 	mal->d_ip = NULL;
 	mal->pid = getpid() & 0xffff;
-	mal->pr.sasend = NULL;
-	mal->pr.sacrecv = NULL;
-	mal->pr.salen = 0;
+	mal->info = NULL;
+	mal->ifap = NULL;
+	mal->ifa = NULL;
 }
