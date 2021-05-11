@@ -30,7 +30,7 @@ void	send_arp_broadcast(t_malcolm *mal)
 {
 	ssize_t		ret;
 	t_arp		*arp;
-	void		buf[BUFSIZE];
+	char		buf[BUFSIZE];
 
 	arp = (t_arp *)buf;
 	//ft_memcpy(arp->s_mac, (unsigned char *)LLADDR((struct sockaddr_dl *)mal->ifa->ifa_addr), 6);

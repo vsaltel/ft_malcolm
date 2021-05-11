@@ -57,9 +57,6 @@ int	check_mac(char *mac)
 
 int	get_args(t_malcolm *mal, int ac, char **av)
 {
-	int	n;
-
-	n = 0;
 	if (ac < 5 || ac > 5)
 		return (err_ret("bad number of arguments", NULL, 1));
 	mal->s_ip = ft_strdup(av[1]);	

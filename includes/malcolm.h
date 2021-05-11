@@ -18,6 +18,7 @@
 # include <netinet/in.h>
 # include <netinet/ip.h>
 # include <ifaddrs.h>
+# include <linux/if_ether.h>
 
 # include "libft.h"
 
