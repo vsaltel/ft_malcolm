@@ -57,7 +57,6 @@ typedef struct s_malcolm
 	struct sockaddr	*d_addr;
 	socklen_t		d_addrlen;
 	int				sockfd;
-	t_proto			pr;
 	pid_t			pid;
 }				t_malcolm;
 
