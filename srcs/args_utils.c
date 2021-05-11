@@ -6,7 +6,6 @@ void	free_args(t_malcolm *mal)
 	free(mal->s_maddr);
 	free(mal->d_ip);
 	free(mal->d_maddr);
-	free(mal->pr.sacrecv);
 }
 
 void	init_malcolm(t_malcolm *mal)
