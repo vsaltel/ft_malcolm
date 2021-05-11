@@ -1,12 +1,12 @@
 #include "malcolm.h"
 
-int	set_socket(int mode)
+int	set_socket(int proto, int type, int mode)
 {
 	int				sock;
 	//int				size;
 	int				ttl;
 
-	sock = socket(AF_PACKET, SOCK_RAW, htons(mode));
+	sock = socket(proto, type, htons(mode));
 	if (sock < 0)
 		return (err_ret("fail to create socket", NULL, -1));
 	/*

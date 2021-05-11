@@ -17,10 +17,13 @@ void	recv_arp(t_malcolm *mal)
 {
 	char		buf[BUFSIZE];
 	ssize_t		ret;
+	struct		*ether_arp;
 
-	printf("wait to recv\n");
 	ret = recvfrom(mal->sockfd, buf, BUFSIZE, 0, mal->d_addr, &mal->d_addrlen);
 	printf("recv %zu\n", ret);
+	arp_frame = (struct ether_arp *)(buf + 14);
+	if (ntohs(arp_frame->arp_op) == ARPOP_REQUEST)
+		printf("arp req\n");
 }
 
 /*
@@ -59,7 +62,7 @@ int	malcolm(t_malcolm *mal)
 	if (mal->ifa)
 	{
 		printf("Found available interface : %s\n", mal->ifa->ifa_name);
-		mal->sockfd = set_socket(ETH_P_ARP);
+		mal->sockfd = set_socket(AF_PACKET, SOCK_RAW, ETH_P_ARP);
 		if (mal->sockfd <= 0)
 			return (-4);
 		recv_arp(mal);

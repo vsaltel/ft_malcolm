@@ -118,7 +118,7 @@ void			set_mac_addr(char *src, uint8_t *dst, int len);
 ** srcs/socket.c
 */
 
-int				set_socket(int mode);
+int				set_socket(int proto, int type, int mode);
 
 /*
 ** srcs/interface.c
