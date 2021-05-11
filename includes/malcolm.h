@@ -21,6 +21,20 @@
 # include <linux/if_ether.h>
 # include <netpacket/packet.h>
 
+# include <stdlib.h>
+# include <stdio.h>
+# include <signal.h>
+# include <unistd.h>
+# include <sys/types.h>
+# include <ifaddrs.h>
+# include <netinet/if_ether.h>
+# include <netdb.h>
+# include <arpa/inet.h>
+# include <netinet/ip.h>
+# include <sys/socket.h>
+# include <stdbool.h>
+# include <netpacket/packet.h>
+
 # include "libft.h"
 
 typedef struct s_arp

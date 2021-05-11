@@ -1,6 +1,6 @@
 #include "malcolm.h"
 
-int	set_socket(t_malcolm *mal, int mode)
+int	set_socket(int mode)
 {
 	int				sock;
 	//int				size;
