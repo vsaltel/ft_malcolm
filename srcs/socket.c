@@ -6,7 +6,7 @@ int	set_socket(t_malcolm *mal, int mode)
 	//int				size;
 	int				ttl;
 
-	sock = socket(mal->pr.sasend->sa_family, SOCK_RAW, htons(mode));
+	sock = socket(AF_PACKET, SOCK_RAW, htons(mode));
 	if (sock < 0)
 		return (err_ret("fail to create socket", NULL, -1));
 	/*
