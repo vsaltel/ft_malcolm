@@ -45,13 +45,6 @@ typedef struct s_pckt
 	void			*content;
 }				t_pckt;
 
-typedef struct s_proto
-{
-	struct sockaddr	*sasend;
-	struct sockaddr	*sacrecv;
-	socklen_t		salen;
-}				t_proto;
-
 typedef struct s_malcolm
 {
 	struct addrinfo	*info;
@@ -61,6 +54,8 @@ typedef struct s_malcolm
 	char			*s_ip;
 	char			*d_maddr;
 	char			*d_ip;
+	struct sockaddr	*d_addr;
+	socklen_t		d_addrlen;
 	int				sockfd;
 	t_proto			pr;
 	pid_t			pid;
@@ -105,13 +100,20 @@ void			recv_msg(t_malcolm *ping, t_malcolm *pckt);
 
 struct addrinfo	*reverse_dns_info(char *host, char *serv,
 					int family, int socktype);
-char			*get_fqdn_info(struct sockaddr *addr);
+struct addrinfo	*get_addr_info(t_malcolm *mal);
 
 /*
 ** srcs/send_msg.c
 */
 
 void			send_msg(void);
+
+/*
+** srcs/mac_conv.c
+*/
+
+int				hextoint(const char *str);
+void			set_mac_addr(char *src, uint8_t *dst, int len);
 
 /*
 ** srcs/socket.c
@@ -123,7 +125,7 @@ int				set_socket(t_malcolm *mal, int mode);
 ** srcs/interface.c
 */
 
-struct ifaddrs		*get_interface(t_malcolm *mal);
+struct ifaddrs	*get_interface(t_malcolm *mal);
 
 /*
 ** srcs/signal.c

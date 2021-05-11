@@ -17,3 +17,13 @@ struct addrinfo	*reverse_dns_info(char *host, char *serv, int family,
 	}
 	return (res);
 }
+
+struct addrinfo	*get_addr_info(t_malcolm *mal)
+{
+	mal->info = reverse_dns_info(mal->dest_name, NULL, AF_INET, 0);
+	if (!info)
+		return (NULL);
+	mal->d_addr = mal->info->ai_addr;
+	mal->d_addrlen = mal->info->ai_addrlen;
+	return (info);
+}
