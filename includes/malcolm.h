@@ -99,7 +99,7 @@ void			recv_msg(t_malcolm *ping, t_malcolm *pckt);
 
 struct addrinfo	*reverse_dns_info(char *host, char *serv,
 					int family, int socktype);
-struct addrinfo	*get_addr_info(t_malcolm *mal);
+struct addrinfo	*get_addr_info(t_malcolm *mal, char *host);
 
 /*
 ** srcs/send_msg.c

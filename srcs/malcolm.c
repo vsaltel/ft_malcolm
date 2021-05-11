@@ -49,7 +49,7 @@ int	malcolm(t_malcolm *mal)
 {
     struct ifaddrs *ifap;
 
-	mal->info = get_addr_info(mal);
+	mal->info = get_addr_info(mal, mal->d_ip);
 	if (!mal->info)
 		return (-2);
 	ifap = get_interface(mal);
