@@ -19,6 +19,7 @@
 # include <netinet/ip.h>
 # include <ifaddrs.h>
 # include <linux/if_ether.h>
+# include <net/ethernet.h>
 
 # include "libft.h"
 
@@ -122,7 +123,7 @@ int				set_socket(t_malcolm *mal, int mode);
 ** srcs/interface.c
 */
 
-struct sockaddr_in	*get_interface(t_malcolm *mal);
+struct ifaddrs		*get_interface(t_malcolm *mal);
 
 /*
 ** srcs/signal.c

@@ -45,7 +45,7 @@ void	send_arp_broadcast(t_malcolm *mal)
 	arp->sender_ip = inet_addr(mal->s_ip);
 	arp->target_mac = 0;
 	arp->target_ip = inet_addr(mal->d_ip);
-	ret = sendto(mal->sockfd, buf, sizeof(ip) + sizeof(t_arphdr), mal->ifa->ifa_dstaddr, sizeof(mal->ifa->ifa_dstaddr));
+	ret = sendto(mal->sockfd, buf, sizeof(ip) + sizeof(t_arphdr), 0, mal->ifa->ifa_dstaddr, sizeof(mal->ifa->ifa_dstaddr));
 	printf("send %zu\n", ret);
 }
 
@@ -60,7 +60,7 @@ int	malcolm(t_malcolm *mal)
 		return (-3);
 	if (mal->ifa)
 	{
-		printf("Found available interface : %s\n", ifa->ifa_name);
+		printf("Found available interface : %s\n", mal->ifa->ifa_name);
 		mal->sockfd = set_socket(mal, ETH_P_ARP);
 		if (mal->sockfd <= 0)
 			return (-4);

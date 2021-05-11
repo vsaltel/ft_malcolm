@@ -1,6 +1,6 @@
 #include "malcolm.h"
 
-struct sockaddr_in	*get_interface(t_malcolm *mal)
+struct ifaddrs	*get_interface(t_malcolm *mal)
 {
     struct ifaddrs *ifap;
     struct ifaddrs *ifa;
