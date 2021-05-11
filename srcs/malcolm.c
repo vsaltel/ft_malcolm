@@ -37,7 +37,7 @@ void	send_arp(t_malcolm *mal)
 	arp->opcode = htons(ARPOP_REQUEST);
 	set_mac_addr(mal->s_maddr, arp->sender_mac, 6);
 	arp->sender_ip = inet_addr(mal->s_ip);
-	arp->target_mac = 0;
+	set_mac_addr(mal->d_maddr, arp->target_mac, 6);
 	arp->target_ip = inet_addr(mal->d_ip);
 	ret = sendto(mal->sockfd, buf, sizeof(ip) + sizeof(t_arp), 0, mal->ifa->ifa_dstaddr, sizeof(mal->ifa->ifa_dstaddr));
 	printf("send %zu\n", ret);
@@ -47,7 +47,7 @@ int	malcolm(t_malcolm *mal)
 {
     struct ifaddrs *ifap;
 
-	mal->info = get_addr_info(mal->d_ip, NULL, AF_INET, 0)
+	mal->info = get_addr_info(mal->d_ip, NULL, AF_INET, 0);
 	if (!mal->info)
 		return (-2);
 	ifap = get_interface(mal);

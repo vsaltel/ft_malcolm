@@ -19,7 +19,7 @@
 # include <netinet/ip.h>
 # include <ifaddrs.h>
 # include <linux/if_ether.h>
-# include <net/ethernet.h>
+# include <netpacket/packet.h>
 
 # include "libft.h"
 
