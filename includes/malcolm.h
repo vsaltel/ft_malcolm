@@ -21,6 +21,7 @@
 # include <linux/if_ether.h>
 # include <netpacket/packet.h>
 
+/*
 # include <stdlib.h>
 # include <stdio.h>
 # include <signal.h>
@@ -34,6 +35,7 @@
 # include <sys/socket.h>
 # include <stdbool.h>
 # include <netpacket/packet.h>
+*/
 
 # include "libft.h"
 
