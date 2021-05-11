@@ -1,0 +1,140 @@
+#ifndef MALCOLM_H
+# define MALCOLM_H
+
+# define BUFSIZE 1500
+# define PCKT_SIZE 56
+# define DEFAULT_TTL 255
+# define IP_STR_SIZE 129
+# define PING_TTL 64
+# define RECV_TIMEOUT 1
+
+# include <stdio.h>
+# include <signal.h>
+# include <netdb.h>
+# include <sys/types.h>
+# include <sys/socket.h>
+# include <arpa/inet.h>
+# include <netinet/in_systm.h>
+# include <netinet/in.h>
+# include <netinet/ip.h>
+# include <ifaddrs.h>
+
+# include "libft.h"
+
+typedef struct s_arp
+{
+	//uint8_t			s_mac[6];
+	//uint8_t			d_mac[6];
+	uint16_t		etype;
+	uint16_t		htype;
+	uint16_t		ptype;
+	uint8_t			hlen;
+	uint8_t			plen;
+	uint16_t		opcode;
+	uint8_t			sender_mac[6];
+	uint8_t			sender_ip[4];
+	uint8_t			target_mac[6];
+	uint8_t			target_ip[4];
+}				t_arp;
+
+typedef struct s_pckt
+{
+	struct ip		*ip;
+	void			*content;
+}				t_pckt;
+
+typedef struct s_proto
+{
+	struct sockaddr	*sasend;
+	struct sockaddr	*sacrecv;
+	socklen_t		salen;
+}				t_proto;
+
+typedef struct s_malcolm
+{
+	struct addrinfo	*info;
+	struct ifaddrs	*ifap;
+	struct ifaddrs	*ifa;
+	char			*s_maddr;
+	char			*s_ip;
+	char			*d_maddr;
+	char			*d_ip;
+	int				sockfd;
+	t_proto			pr;
+	pid_t			pid;
+}				t_malcolm;
+
+extern t_malcolm	g_mal;
+
+/*
+** srcs/args.c
+*/
+
+int				get_args(t_malcolm *ping, int ac, char **av);
+
+/*
+** srcs/args_utils.c
+*/
+
+void	free_args(t_malcolm *mal);
+void	init_malcolm(t_malcolm *mal);
+
+/*
+** srcs/conv_addr.c
+*/
+
+char			*set_inetaddr(struct sockaddr *sa);
+
+/*
+** srcs/malcolm.c
+*/
+
+int				malcolm(t_malcolm *mal);
+
+/*
+** srcs/recv_msg.c
+*/
+
+void			recv_msg(t_malcolm *ping, t_malcolm *pckt);
+
+/*
+** srcs/rev_dns.c
+*/
+
+struct addrinfo	*reverse_dns_info(char *host, char *serv,
+					int family, int socktype);
+char			*get_fqdn_info(struct sockaddr *addr);
+
+/*
+** srcs/send_msg.c
+*/
+
+void			send_msg(void);
+
+/*
+** srcs/socket.c
+*/
+
+int				set_socket(t_malcolm *mal, int mode);
+
+/*
+** srcs/interface.c
+*/
+
+struct sockaddr_in	*get_interface(t_malcolm *mal);
+
+/*
+** srcs/signal.c
+*/
+
+void			catch_sigint(int signal);
+
+/*
+** srcs/utils.c
+*/
+
+unsigned short	checksum(void *b, int len);
+void			print_usage(void);
+int				err_ret(char *err, char *arg, int ret);
+
+#endif
