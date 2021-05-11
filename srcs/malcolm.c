@@ -22,6 +22,7 @@ void	recv_arp(t_malcolm *mal)
 	printf("recv %zu\n", ret);
 }
 
+/*
 void	send_arp(t_malcolm *mal)
 {
 	ssize_t		ret;
@@ -42,12 +43,13 @@ void	send_arp(t_malcolm *mal)
 	ret = sendto(mal->sockfd, buf, sizeof(t_arp), 0, mal->ifa->ifa_dstaddr, sizeof(mal->ifa->ifa_dstaddr));
 	printf("send %zu\n", ret);
 }
+*/
 
 int	malcolm(t_malcolm *mal)
 {
     struct ifaddrs *ifap;
 
-	mal->info = get_addr_info(mal->d_ip, NULL, AF_INET, 0);
+	mal->info = get_addr_info(mal);
 	if (!mal->info)
 		return (-2);
 	ifap = get_interface(mal);
