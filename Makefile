@@ -22,6 +22,7 @@ FILES	=	main.c				\
 			socket.c			\
 			interface.c			\
 			malcolm.c			\
+			rev_dns.c			\
 			args_utils.c
 
 SRCS	=	$(addprefix $(SRCDIR)/, $(FILES))
