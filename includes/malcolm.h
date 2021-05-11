@@ -132,7 +132,7 @@ void			set_mac_addr(char *src, uint8_t *dst, int len);
 ** srcs/socket.c
 */
 
-int				set_socket(t_malcolm *mal, int mode);
+int				set_socket(int mode);
 
 /*
 ** srcs/interface.c
