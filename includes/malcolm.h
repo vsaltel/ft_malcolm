@@ -18,10 +18,9 @@
 # include <netinet/in.h>
 # include <netinet/ip.h>
 # include <ifaddrs.h>
-# include <linux/if_ether.h>
+# include <netinet/if_ether.h>
 # include <netpacket/packet.h>
 
-# include <stdbool.h>
 /*
 # include <stdlib.h>
 # include <stdio.h>
@@ -35,6 +34,7 @@
 # include <netinet/ip.h>
 # include <sys/socket.h>
 # include <netpacket/packet.h>
+# include <stdbool.h>
 */
 
 # include "libft.h"
