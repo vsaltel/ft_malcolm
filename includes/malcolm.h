@@ -21,6 +21,7 @@
 # include <linux/if_ether.h>
 # include <netpacket/packet.h>
 
+# include <stdbool.h>
 /*
 # include <stdlib.h>
 # include <stdio.h>
@@ -33,7 +34,6 @@
 # include <arpa/inet.h>
 # include <netinet/ip.h>
 # include <sys/socket.h>
-# include <stdbool.h>
 # include <netpacket/packet.h>
 */
 
