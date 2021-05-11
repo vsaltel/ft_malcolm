@@ -20,10 +20,12 @@ struct addrinfo	*reverse_dns_info(char *host, char *serv, int family,
 
 struct addrinfo	*get_addr_info(t_malcolm *mal, char *host)
 {
-	mal->info = reverse_dns_info(host, NULL, AF_INET, 0);
-	if (!mal->info)
+	struct addrinfo	*info;
+
+	info = reverse_dns_info(host, NULL, AF_INET, 0);
+	if (!info)
 		return (NULL);
-	mal->d_addr = mal->info->ai_addr;
-	mal->d_addrlen = mal->info->ai_addrlen;
+	mal->d_addr = info->ai_addr;
+	mal->d_addrlen = info->ai_addrlen;
 	return (info);
 }
