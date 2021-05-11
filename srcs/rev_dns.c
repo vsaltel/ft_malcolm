@@ -1,4 +1,4 @@
-#include "ping.h"
+#include "malcolm.h"
 
 struct addrinfo	*reverse_dns_info(char *host, char *serv, int family,
 	int socktype)
