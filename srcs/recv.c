@@ -1,4 +1,4 @@
-#include "ping.h"
+#include "malcolm.h"
 
 int	recv_arp(t_malcolm *mal, t_arp *arp)
 {
