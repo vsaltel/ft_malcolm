@@ -21,7 +21,7 @@ int	malcolm(t_malcolm *mal)
 		while (!ret)
 			ret = recv_arp(mal, recvbuf);
 		close(mal->sockfd);
-		mal->sockfd = set_socket(AF_INET, SOCK_PACKET, ETH_P_RARP);
+		mal->sockfd = set_socket(AF_INET, SOCK_RAW, ETH_P_RARP);
 		if (mal->sockfd <= 0)
 			return (5);
 		send_arp(mal, recvbuf);
