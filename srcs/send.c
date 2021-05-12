@@ -40,7 +40,7 @@ void	send_arp(t_malcolm *mal, char *recvbuf)
 	copy_bytes(arp->sender_ip, bef->target_ip, 4);
 	copy_bytes(arp->target_mac, bef->sender_mac, 6);
 	copy_bytes(arp->target_ip, bef->sender_ip, 4);
-	ft_bzero(arp->padding, 10);
+	ft_bzero(arp->padding, 18);
 	display_addr(arp);
 	struct sockaddr_in *lala;
 	lala = (struct sockaddr_in *)mal->d_addr;
