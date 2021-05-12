@@ -1,5 +1,34 @@
 #include "malcolm.h"
 
+static char	bytetochar(uint8_t byte)
+{
+	if (bytes[i] >= 10)
+		return (bytes[i] + 'A');
+	else
+		return (bytes[i] + '0');
+}
+
+char	*inttohex(const uint8_t *bytes)
+{
+	char	buf[17];
+	size_t	i;
+	size_t	y;
+
+	i = 0;
+	y = 0;
+	while (i < 6 && y < 18)
+	{
+		if (i != 0)
+			buf[y - 1] = ':';
+		buf[y] = bytetochar(bytes[i] / 16);
+		buf[y + 1] = bytetochar(bytes[i] % 16);
+		y += 3
+		i += 1;
+	}
+	buf[16] = '\0';
+	return (buf);
+}
+
 int		hextoint(const char *str)
 {
 	size_t	i;

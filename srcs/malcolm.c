@@ -17,14 +17,20 @@ void	recv_arp(t_malcolm *mal)
 {
 	char		buf[BUFSIZE];
 	ssize_t		ret;
-	t_arp	*arp;
+	t_arp		*arp;
 
-	printf("val %d %d\n", ARPOP_REQUEST, ARPOP_REPLY);
 	ret = recvfrom(mal->sockfd, buf, BUFSIZE, 0, mal->d_addr, &mal->d_addrlen);
-	printf("recv %zu\n", ret);
 	arp = (t_arp *)(buf + 12);
-	if (ntohs(arp->opcode) == 1)
-		printf("arp req\n");
+	if (ret >= 12 + sizeof(t_arp) &&
+		ntohs(arp->etype) == ETH_P_ARP &&
+		ntohs(arp->opcode) == 1)
+	{
+		printf("An ARP request has been broadcast.\n"
+				"\tmac address of request : %s\n"
+				"\tIP address of request : %s\n",
+				inttohex(ntohs(arp->sender_mac)),
+				inttohex(ntohs(arp->sender_ip)));
+	}
 }
 
 /*
@@ -35,7 +41,7 @@ void	send_arp(t_malcolm *mal)
 	char		buf[BUFSIZE];
 
 	arp = (t_arp *)buf;
-	arp->etype = htons(ETH_P_ARP);
+	//arp->etype = htons(ETH_P_ARP);
 	arp->htype = htons(1);
 	arp->ptype = htons(ETH_P_IP);
 	arp->hlen = 6;
