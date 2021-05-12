@@ -19,7 +19,7 @@ void	recv_arp(t_malcolm *mal)
 	ssize_t		ret;
 	struct ether_arp	*arp;
 
-	printf("val %d\n", ARPOP_REQUEST, ARPOP_REPLY);
+	printf("val %d %d\n", ARPOP_REQUEST, ARPOP_REPLY);
 	ret = recvfrom(mal->sockfd, buf, BUFSIZE, 0, mal->d_addr, &mal->d_addrlen);
 	printf("recv %zu\n", ret);
 	arp = (struct ether_arp *)(buf + 14);
