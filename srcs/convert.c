@@ -21,8 +21,14 @@ char	*mac_strconv(const uint8_t *bytes)
 	{
 		if (i != 0)
 			buf[y - 1] = ':';
-		buf[y] = bytetochar(bytes[i] / 16);
-		buf[y + 1] = bytetochar(bytes[i] % 16);
+		if (bytes[i] / 16 > 0)
+			buf[y] = bytetochar(bytes[i] / 16);
+		else
+			y--;
+		if (bytes[i] % 16 > 0)
+			buf[y + 1] = bytetochar(bytes[i] % 16);
+		else
+			y--;
 		y += 3;
 		i += 1;
 	}

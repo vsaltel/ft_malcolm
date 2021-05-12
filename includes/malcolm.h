@@ -27,7 +27,7 @@ typedef struct s_arp
 {
 	//uint8_t			s_mac[6];
 	//uint8_t			d_mac[6];
-	uint16_t		etype;
+	//uint16_t		etype;
 	uint16_t		htype;
 	uint16_t		ptype;
 	uint8_t			hlen;
