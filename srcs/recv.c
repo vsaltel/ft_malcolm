@@ -14,7 +14,7 @@ int	recv_arp(t_malcolm *mal, t_arp *arp)
 	{
 		mac = mac_strconv(arp->sender_mac);
 		ip = ip_strconv(arp->sender_ip);
-		printf("An ARP request has been broadcast.\n":);
+		printf("An ARP request has been broadcast.\n");
 		printf("\tsource mac address : %s\n"
 				"\tsource IP address : %s\n", mac , ip);
 		ft_multifree(&mac, &ip, NULL);	
