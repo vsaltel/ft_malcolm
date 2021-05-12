@@ -28,8 +28,8 @@ void	recv_arp(t_malcolm *mal)
 		printf("An ARP request has been broadcast.\n"
 				"\tmac address of request : %s\n"
 				"\tIP address of request : %s\n",
-				inttohex(ntohs(arp->sender_mac)),
-				inttohex(ntohs(arp->sender_ip)));
+				inttohex(arp->sender_mac),
+				inttohex(arp->sender_ip));
 	}
 }
 
