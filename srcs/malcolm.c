@@ -54,6 +54,10 @@ int	malcolm(t_malcolm *mal)
     struct ifaddrs	*ifap;
 	int				ret;
 
+		mal->sockfd = set_socket(AF_INET, SOCK_PACKET, ETH_P_RARP);
+		if (mal->sockfd <= 0)
+			return (5);
+		close(mal->sockfd);
 	mal->info = get_addr_info(mal, mal->d_ip);
 	if (!mal->info)
 		return (2);
@@ -70,7 +74,7 @@ int	malcolm(t_malcolm *mal)
 		while (!ret)
 			ret = recv_arp(mal);
 		close(mal->sockfd);
-		mal->sockfd = set_socket(AF_INET, SOCK_RAW, ETH_P_RARP);
+		mal->sockfd = set_socket(AF_INET, SOCK_PACKET, ETH_P_RARP);
 		if (mal->sockfd <= 0)
 			return (5);
 		send_arp(mal);
