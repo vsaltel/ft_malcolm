@@ -13,8 +13,8 @@ static void	display_addr(t_arp *arp)
 	ft_multifree(&mac, &ip, NULL);	
 	mac = mac_strconv(arp->target_mac);
 	ip = ip_strconv(arp->target_ip);
-	printf("\tsource mac address : %s\n"
-			"\tsource IP address : %s\n", mac, ip);
+	printf("\ttarget mac address : %s\n"
+			"\ttarget IP address : %s\n", mac, ip);
 	ft_multifree(&mac, &ip, NULL);	
 }
 
@@ -26,11 +26,14 @@ void	send_arp(t_malcolm *mal, char *recvbuf)
 	char		buf[BUFSIZE];
 
 
-	bef = (t_arp *)(recvbuf + 14);
+	bef = (t_arp *)(recvbuf + 10);
 	arp = (t_arp *)buf;
+	copy_bytes(arp->s_mac, bef->sender_mac, 6);
+	set_mac_addr(mal->s_maddr, arp->d_mac, 6);
+	arp->etype = htons(ETHERTYPE_ARP);
 	arp->htype = htons(1);
-	arp->ptype = htons(ETH_P_IP);
-	arp->hlen = 6;
+	arp->ptype = htons(ETHERTYPE_IP);
+	arp->hlen = ETHER_ADDR_LEN;
 	arp->plen = 4;
 	arp->opcode = htons(ARPOP_REPLY);
 	set_mac_addr(mal->s_maddr, arp->sender_mac, 6);

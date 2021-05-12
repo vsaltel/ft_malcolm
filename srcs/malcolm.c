@@ -3,7 +3,6 @@
 int	malcolm(t_malcolm *mal)
 {
 	char			recvbuf[BUFSIZE];
-	t_arp			arp;
 	int				ret;
 
 	mal->info = get_addr_info(mal, mal->d_ip);
