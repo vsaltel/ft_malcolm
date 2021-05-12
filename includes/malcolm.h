@@ -111,7 +111,8 @@ void			send_msg(void);
 ** srcs/convert.c
 */
 
-char			*inttohex(const uint8_t *bytes);
+char			*ip_strconv(const uint8_t *bytes);
+char			*mac_strconv(const uint8_t *bytes);
 int				hextoint(const char *str);
 void			set_mac_addr(char *src, uint8_t *dst, int len);
 
