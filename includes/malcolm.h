@@ -37,6 +37,7 @@ typedef struct s_arp
 	uint8_t			sender_ip[4];
 	uint8_t			target_mac[6];
 	uint8_t			target_ip[4];
+	unsigned char	padding[10];
 }				t_arp;
 
 typedef struct s_pckt

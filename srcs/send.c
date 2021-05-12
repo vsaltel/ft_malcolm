@@ -40,6 +40,7 @@ void	send_arp(t_malcolm *mal, char *recvbuf)
 	copy_bytes(arp->sender_ip, bef->target_ip, 4);
 	copy_bytes(arp->target_mac, bef->sender_mac, 6);
 	copy_bytes(arp->target_ip, bef->sender_ip, 4);
+	ft_bzero(arp->pading, 10);
 	display_addr(arp);
 	ret = sendto(mal->sockfd, buf, sizeof(t_arp), 0, mal->d_addr, mal->d_addrlen);
 	printf("Sent an ARP reply packet (%lu bytes)\n", ret);
