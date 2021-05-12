@@ -43,7 +43,7 @@ void	send_arp(t_malcolm *mal, char *recvbuf)
 	ft_bzero(arp->padding, 10);
 	display_addr(arp);
 	char *mac;
-	mac = mac_strconv((struct *sockaddr_in)(mal->d_addr)->sin_addr.s_addr);
+	mac = mac_strconv((struct sockaddr_in*)(mal->d_addr)->sin_addr.s_addr);
 	printf("mac=%s\n", mac);
 	ret = sendto(mal->sockfd, buf, sizeof(t_arp), 0, mal->d_addr, mal->d_addrlen);
 	printf("Sent an ARP reply packet (%ld bytes)\n", ret);
