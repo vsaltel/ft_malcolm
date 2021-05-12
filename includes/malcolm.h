@@ -108,7 +108,7 @@ struct addrinfo	*get_addr_info(t_malcolm *mal, char *host);
 void			send_msg(void);
 
 /*
-** srcs/mac_conv.c
+** srcs/convert.c
 */
 
 char			*inttohex(const uint8_t *bytes);
