@@ -53,7 +53,7 @@ char	*ip_strconv(const uint8_t *bytes)
 			y--;
 		buf[y + 2] = bytes[i] % 10 + '0';
 		i += 1;
-		y += 5;
+		y += 4;
 	}
 	buf[y - 1] = '\0';
 	return (buf);
