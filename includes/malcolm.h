@@ -114,7 +114,9 @@ void			send_msg(void);
 char			*ip_strconv(const uint8_t *bytes);
 char			*mac_strconv(const uint8_t *bytes);
 int				hextoint(const char *str);
+int				dectoint(const char *str);
 void			set_mac_addr(char *src, uint8_t *dst, int len);
+void			set_ip_addr(char *src, uint8_t *dst, int len);
 
 /*
 ** srcs/socket.c
