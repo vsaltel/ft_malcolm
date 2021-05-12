@@ -18,6 +18,8 @@ void	recv_arp(t_malcolm *mal)
 	char		buf[BUFSIZE];
 	ssize_t		ret;
 	t_arp		*arp;
+	char		*mac;
+	char		*ip;
 
 	ret = recvfrom(mal->sockfd, buf, BUFSIZE, 0, mal->d_addr, &mal->d_addrlen);
 	arp = (t_arp *)(buf + 12);
@@ -25,11 +27,12 @@ void	recv_arp(t_malcolm *mal)
 		ntohs(arp->etype) == ETH_P_ARP &&
 		ntohs(arp->opcode) == 1)
 	{
+		mac = inttohex(arp->sender_mac);
+		ip = inttohex(arp->sender_ip);
 		printf("An ARP request has been broadcast.\n"
 				"\tmac address of request : %s\n"
 				"\tIP address of request : %s\n",
-				inttohex(arp->sender_mac),
-				inttohex(arp->sender_ip));
+				mac , ip);
 	}
 }
 

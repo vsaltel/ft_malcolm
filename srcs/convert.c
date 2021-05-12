@@ -10,12 +10,13 @@ static char	bytetochar(uint8_t byte)
 
 char	*inttohex(const uint8_t *bytes)
 {
-	char	buf[17];
+	char	*buf;
 	size_t	i;
 	size_t	y;
 
 	i = 0;
 	y = 0;
+	buf = malloc(17);
 	while (i < 6 && y < 18)
 	{
 		if (i != 0)
