@@ -8,8 +8,8 @@ int	recv_arp(t_malcolm *mal, char *buf)
 	char		*ip;
 
 	ret = recvfrom(mal->sockfd, buf, BUFSIZE, 0, mal->d_addr, &mal->d_addrlen);
-	arp = (t_arp *)(buf + 10);
-	if (ret >= (ssize_t)(10 + sizeof(t_arp)) &&
+	arp = (t_arp *)(buf);
+	if (ret >= (ssize_t)(0 + sizeof(t_arp)) &&
 		ntohs(arp->opcode) == ARPOP_REQUEST)
 	{
 		mac = mac_strconv(arp->sender_mac);
@@ -25,5 +25,6 @@ int	recv_arp(t_malcolm *mal, char *buf)
 		ft_multifree(&mac, &ip, NULL);	
 		return (1);
 	}
+	printf("Packet find but not attempt (%lu)\n", ret);
 	return (0);
 }
