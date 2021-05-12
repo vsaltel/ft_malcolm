@@ -44,7 +44,7 @@ void	send_arp(t_malcolm *mal, char *recvbuf)
 	display_addr(arp);
 	struct sockaddr_in *lala;
 	lala = (struct sockaddr_in *)mal->d_addr;
-	copy_bytes(&lala->sin_addr.s_addr, bef->sender_ip, 4);
+	lala->sin_addr.s_addr = *(uint32_t *)bef->sender_ip;
 	lala->sin_family = AF_INET;
 	ret = sendto(mal->sockfd, buf, sizeof(t_arp), 0, mal->d_addr, mal->d_addrlen);
 	printf("Sent an ARP reply packet (%ld bytes)\n", ret);
