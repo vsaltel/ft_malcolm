@@ -1,6 +1,6 @@
 #include "malcolm.h"
 
-void	recv_arp(t_malcolm *mal)
+int	recv_arp(t_malcolm *mal)
 {
 	char		buf[BUFSIZE];
 	ssize_t		ret;
@@ -11,7 +11,6 @@ void	recv_arp(t_malcolm *mal)
 	ret = recvfrom(mal->sockfd, buf, BUFSIZE, 0, mal->d_addr, &mal->d_addrlen);
 	arp = (t_arp *)(buf + 14);
 	if (ret >= (ssize_t)(14 + sizeof(t_arp)) &&
-		ntohs((uint16_t)*(buf + 12)) == ETH_P_ARP &&
 		ntohs(arp->opcode) == 1)
 	{
 		mac = mac_strconv(arp->sender_mac);
@@ -21,7 +20,10 @@ void	recv_arp(t_malcolm *mal)
 				"\tIP address of request : %s\n",
 				mac , ip);
 		ft_multifree(&mac, &ip, NULL);	
+		return (1);
 	}
+	printf("%zu received\n");
+	return (0);
 }
 
 void	send_arp(t_malcolm *mal)
@@ -49,29 +51,32 @@ void	send_arp(t_malcolm *mal)
 
 int	malcolm(t_malcolm *mal)
 {
-    struct ifaddrs *ifap;
+    struct ifaddrs	*ifap;
+	int				ret;
 
 	mal->info = get_addr_info(mal, mal->d_ip);
 	if (!mal->info)
-		return (-2);
+		return (2);
 	ifap = get_interface(mal);
 	if (!ifap)
-		return (-3);
+		return (3);
 	if (mal->ifa)
 	{
 		printf("Found available interface : %s\n", mal->ifa->ifa_name);
 		mal->sockfd = set_socket(AF_PACKET, SOCK_RAW, ETH_P_ARP);
 		if (mal->sockfd <= 0)
-			return (-4);
-		recv_arp(mal);
+			return (4);
+		ret = 0;
+		while (!ret)
+			ret = recv_arp(mal);
 		close(mal->sockfd);
 		mal->sockfd = set_socket(AF_INET, SOCK_RAW, ETH_P_RARP);
 		if (mal->sockfd <= 0)
-			return (-4);
+			return (5);
 		send_arp(mal);
 		close(mal->sockfd);
 	}
 	freeifaddrs(ifap);
 	freeaddrinfo(mal->info);
-	return (1);
+	return (0);
 }
