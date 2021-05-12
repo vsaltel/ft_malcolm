@@ -43,6 +43,7 @@ void	send_arp(t_malcolm *mal, char *recvbuf)
 	ft_bzero(arp->padding, 10);
 	display_addr(arp);
 	struct sockaddr_in *lala;
+	ft_bzero(lala, sizeof(struct sockaddr_in))
 	lala = (struct sockaddr_in *)mal->d_addr;
 	lala->sin_addr.s_addr = *(uint32_t *)bef->sender_ip;
 	lala->sin_family = AF_INET;
