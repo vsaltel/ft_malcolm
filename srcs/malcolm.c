@@ -21,7 +21,7 @@ void	recv_arp(t_malcolm *mal)
 
 	ret = recvfrom(mal->sockfd, buf, BUFSIZE, 0, mal->d_addr, &mal->d_addrlen);
 	arp = (t_arp *)(buf + 12);
-	if (ret >= 12 + sizeof(t_arp) &&
+	if (ret >= (ssize_t)(12 + sizeof(t_arp)) &&
 		ntohs(arp->etype) == ETH_P_ARP &&
 		ntohs(arp->opcode) == 1)
 	{
