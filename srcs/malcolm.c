@@ -42,7 +42,7 @@ void	send_arp(t_malcolm *mal)
 	set_mac_addr(mal->d_maddr, arp->target_mac, 6);
 	set_ip_addr(mal->d_ip, arp->target_ip, 4);
 	printf("Now sending an ARP reply to the target address with spoofed source, please wait...\n");
-	ret = sendto(mal->sockfd, buf, sizeof(t_arp), 0, mal->d_addr, &mal->d_addrlen);
+	ret = sendto(mal->sockfd, buf, sizeof(t_arp), 0, mal->d_addr, mal->d_addrlen);
 	printf("%zu sent\n", ret);
 	printf("Sent an ARP reply packet, you may now check the arp table on the target.\n");
 }
