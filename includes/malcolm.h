@@ -21,6 +21,8 @@
 # include <netinet/if_ether.h>
 # include <netpacket/packet.h>
 
+# include <string.h>
+
 # include "libft.h"
 
 typedef struct s_arp
