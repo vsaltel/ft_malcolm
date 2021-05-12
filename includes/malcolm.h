@@ -91,7 +91,7 @@ int				malcolm(t_malcolm *mal);
 ** srcs/recv_msg.c
 */
 
-int				recv_arp(t_malcolm *mal, t_arp *arp);
+int				recv_arp(t_malcolm *mal, t_arp *arp, char *buf);
 
 /*
 ** srcs/rev_dns.c

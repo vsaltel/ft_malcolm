@@ -29,7 +29,7 @@ char	*mac_strconv(const uint8_t *bytes)
 		y += 3;
 		i += 1;
 	}
-	buf[17] = '\0';
+	buf[y - 1] = '\0';
 	return (buf);
 }
 

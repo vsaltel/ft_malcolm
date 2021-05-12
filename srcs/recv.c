@@ -1,8 +1,7 @@
 #include "malcolm.h"
 
-int	recv_arp(t_malcolm *mal, t_arp *arp)
+int	recv_arp(t_malcolm *mal, t_arp *arp, char *buf)
 {
-	char		buf[BUFSIZE];
 	ssize_t		ret;
 	char		*mac;
 	char		*ip;

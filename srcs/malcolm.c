@@ -2,6 +2,7 @@
 
 int	malcolm(t_malcolm *mal)
 {
+	char			recvbuf[BUFSIZE];
 	t_arp			arp;
 	int				ret;
 
@@ -19,7 +20,7 @@ int	malcolm(t_malcolm *mal)
 			return (4);
 		ret = 0;
 		while (!ret)
-			ret = recv_arp(mal, &arp);
+			ret = recv_arp(mal, &arp, recvbuf);
 		close(mal->sockfd);
 		mal->sockfd = set_socket(AF_INET, SOCK_PACKET, ETH_P_RARP);
 		if (mal->sockfd <= 0)
