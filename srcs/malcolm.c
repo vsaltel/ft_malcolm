@@ -33,7 +33,7 @@ void	recv_arp(t_malcolm *mal)
 				"\tmac address of request : %s\n"
 				"\tIP address of request : %s\n",
 				mac , ip);
-		ft_multifree(mac, ip, NULL);	
+		ft_multifree(&mac, &ip, NULL);	
 	}
 }
 
