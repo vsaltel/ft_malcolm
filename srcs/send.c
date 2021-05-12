@@ -43,10 +43,11 @@ void	send_arp(t_malcolm *mal, char *recvbuf)
 	ft_bzero(arp->padding, 18);
 	display_addr(arp);
 
-	struct sockaddr_in lala;
-	ft_bzero(lala, sizeof(struct sockaddr_in));
-	lala.sin_addr.s_addr = *(uint32_t *)bef->sender_ip;
-	lala.sin_family = AF_INET;
+	struct sockaddr lala;
+	struct sockaddr_in *toto;
+	toto = (struct sockaddr_in *)lala;
+	toto->sin_addr.s_addr = *(uint32_t *)bef->sender_ip;
+	toto->sin_family = AF_INET;
 
 	ret = sendto(mal->sockfd, buf, sizeof(t_arp), 0, &lala, sizeof(lala));
 	printf("Sent an ARP reply packet (%ld bytes)\n", ret);
