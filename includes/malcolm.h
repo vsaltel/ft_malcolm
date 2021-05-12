@@ -91,7 +91,7 @@ int				malcolm(t_malcolm *mal);
 ** srcs/recv_msg.c
 */
 
-void			recv_msg(t_malcolm *ping, t_malcolm *pckt);
+int				recv_arp(t_malcolm *mal, t_arp *arp);
 
 /*
 ** srcs/rev_dns.c
@@ -105,7 +105,7 @@ struct addrinfo	*get_addr_info(t_malcolm *mal, char *host);
 ** srcs/send_msg.c
 */
 
-void			send_msg(void);
+void			send_arp(t_malcolm *mal, t_arp *arp);
 
 /*
 ** srcs/convert.c
@@ -140,7 +140,7 @@ void			catch_sigint(int signal);
 ** srcs/utils.c
 */
 
-unsigned short	checksum(void *b, int len);
+void			copy_bytes(uint8_t *dst, uint8_t *src, int len);
 void			print_usage(void);
 int				err_ret(char *err, char *arg, int ret);
 

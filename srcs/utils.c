@@ -1,24 +1,15 @@
 #include "malcolm.h"
 
-unsigned short	checksum(void *b, int len)
+void	copy_bytes(uint8_t *dst, uint8_t *src, int len)
 {
-	unsigned short	*buf;
-	unsigned int	sum;
-	unsigned short	result;
+	int	i;
 
-	buf = b;
-	sum = 0;
-	while (len > 1)
+	i = 0;
+	while (i < len)
 	{
-		sum += *buf++;
-		len -= 2;
+		dst[i] = src[i];
+		i++;
 	}
-	if (len == 1)
-		sum += *(unsigned char *)buf;
-	sum = (sum >> 16) + (sum & 0xFFFF);
-	sum += (sum >> 16);
-	result = ~sum;
-	return (result);
 }
 
 int		err_ret(char *err, char *arg, int ret)
