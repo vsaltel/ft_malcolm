@@ -2,10 +2,10 @@
 
 static char	bytetochar(uint8_t byte)
 {
-	if (byte[i] >= 10)
-		return (byte[i] + 'A');
+	if (byte >= 10)
+		return (byte + 'A');
 	else
-		return (byte[i] + '0');
+		return (byte + '0');
 }
 
 char	*inttohex(const uint8_t *bytes)
