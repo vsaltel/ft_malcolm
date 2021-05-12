@@ -9,8 +9,8 @@ int	malcolm(t_malcolm *mal)
 	mal->info = get_addr_info(mal, mal->d_ip);
 	if (!mal->info)
 		return (2);
-	ifap = get_interface(mal);
-	if (!ifap)
+	mal->ifap = get_interface(mal);
+	if (!mal->ifap)
 		return (3);
 	if (mal->ifa)
 	{
@@ -28,7 +28,7 @@ int	malcolm(t_malcolm *mal)
 		send_arp(mal, &arp);
 		close(mal->sockfd);
 	}
-	freeifaddrs(ifap);
+	freeifaddrs(mal->ifap);
 	freeaddrinfo(mal->info);
 	return (0);
 }

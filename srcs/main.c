@@ -12,6 +12,7 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	init_malcolm(&g_mal);
+	signal(SIGINT, &catch_sigint);
 	if (get_args(&g_mal, argc, argv))
 		return (1);
 	ret = malcolm(&g_mal);

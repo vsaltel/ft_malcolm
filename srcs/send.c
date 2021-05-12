@@ -1,6 +1,6 @@
 #include "malcolm.h"
 
-void	display_addr(t_arp *arp)
+static void	display_addr(t_arp *arp)
 {
 	char		*mac;
 	char		*ip;
@@ -17,6 +17,7 @@ void	display_addr(t_arp *arp)
 			"source IP address : %s\n", mac, ip);
 	ft_multifree(&mac, &ip, NULL);	
 }
+
 void	send_arp(t_malcolm *mal, t_arp *bef)
 {
 	ssize_t		ret;
