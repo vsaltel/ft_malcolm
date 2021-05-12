@@ -2,7 +2,6 @@
 
 int	malcolm(t_malcolm *mal)
 {
-    struct ifaddrs	*ifap;
 	t_arp			arp;
 	int				ret;
 

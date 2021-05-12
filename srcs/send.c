@@ -33,8 +33,8 @@ void	send_arp(t_malcolm *mal, t_arp *bef)
 	arp->opcode = htons(ARPOP_REPLY);
 	set_mac_addr(mal->s_maddr, arp->sender_mac, 6);
 	copy_bytes(arp->sender_ip, bef->target_ip, 4);
-	copy_bytes(arp->target_mac, bef->source_mac, 6);
-	copy_bytes(arp->target_ip, bef->source_ip, 4);
+	copy_bytes(arp->target_mac, bef->sender_mac, 6);
+	copy_bytes(arp->target_ip, bef->sender_ip, 4);
 	display_addr(arp);
 	ret = sendto(mal->sockfd, buf, sizeof(t_arp), 0, mal->d_addr, mal->d_addrlen);
 	printf("Sent an ARP reply packet of %lu len\n", ret);
