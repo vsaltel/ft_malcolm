@@ -18,13 +18,15 @@ static void	display_addr(t_arp *arp)
 	ft_multifree(&mac, &ip, NULL);	
 }
 
-void	send_arp(t_malcolm *mal, t_arp *bef)
+void	send_arp(t_malcolm *mal, char *recvbuf)
 {
 	ssize_t		ret;
 	t_arp		*arp;
+	t_arp		*bef;
 	char		buf[BUFSIZE];
 
 
+	bef = (t_arp *)(recvbuf + 14);
 	arp = (t_arp *)buf;
 	arp->htype = htons(1);
 	arp->ptype = htons(ETH_P_IP);

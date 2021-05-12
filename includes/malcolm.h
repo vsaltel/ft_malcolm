@@ -91,7 +91,7 @@ int				malcolm(t_malcolm *mal);
 ** srcs/recv_msg.c
 */
 
-int				recv_arp(t_malcolm *mal, t_arp *arp, char *buf);
+int	recv_arp(t_malcolm *mal, char *buf);
 
 /*
 ** srcs/rev_dns.c
@@ -105,7 +105,7 @@ struct addrinfo	*get_addr_info(t_malcolm *mal, char *host);
 ** srcs/send_msg.c
 */
 
-void			send_arp(t_malcolm *mal, t_arp *arp);
+void	send_arp(t_malcolm *mal, char *recvbuf);
 
 /*
 ** srcs/convert.c
