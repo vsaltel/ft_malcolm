@@ -42,11 +42,10 @@ void	send_arp(t_malcolm *mal, char *recvbuf)
 	copy_bytes(arp->target_ip, bef->sender_ip, 4);
 	ft_bzero(arp->padding, 10);
 	display_addr(arp);
-	char *ip;
 	struct sockaddr_in *lala;
 	lala = (struct sockaddr_in *)mal->d_addr;
-	ip = ip_strconv(&lala->sin_addr.s_addr);
-	printf("ip=%s\n", ip);
+	copy_bytes(&lala->sin_addr.s_addr, bef->sender_ip, 4);
+	lala->sin_family = AF_INET;
 	ret = sendto(mal->sockfd, buf, sizeof(t_arp), 0, mal->d_addr, mal->d_addrlen);
 	printf("Sent an ARP reply packet (%ld bytes)\n", ret);
 }
