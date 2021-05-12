@@ -20,12 +20,12 @@ int	malcolm(t_malcolm *mal)
 			return (4);
 		ret = 0;
 		while (!ret)
-			ret = recv_arp(mal, &arp, recvbuf);
+			ret = recv_arp(mal, recvbuf);
 		close(mal->sockfd);
 		mal->sockfd = set_socket(AF_INET, SOCK_PACKET, ETH_P_RARP);
 		if (mal->sockfd <= 0)
 			return (5);
-		send_arp(mal, &arp);
+		send_arp(mal, recvbuf);
 		close(mal->sockfd);
 	}
 	freeifaddrs(mal->ifap);
