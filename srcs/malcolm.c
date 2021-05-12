@@ -22,7 +22,7 @@ int	recv_arp(t_malcolm *mal)
 		ft_multifree(&mac, &ip, NULL);	
 		return (1);
 	}
-	printf("%zu received\n");
+	printf("%zu received\n", ret);
 	return (0);
 }
 
