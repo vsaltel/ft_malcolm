@@ -17,13 +17,13 @@ void	recv_arp(t_malcolm *mal)
 {
 	char		buf[BUFSIZE];
 	ssize_t		ret;
-	struct ether_arp	*arp;
+	t_arp	*arp;
 
 	printf("val %d %d\n", ARPOP_REQUEST, ARPOP_REPLY);
 	ret = recvfrom(mal->sockfd, buf, BUFSIZE, 0, mal->d_addr, &mal->d_addrlen);
 	printf("recv %zu\n", ret);
-	arp = (struct ether_arp *)(buf + 14);
-	if (ntohs(arp->arp_op) == ARPOP_REQUEST)
+	arp = (t_arp *)(buf + 12);
+	if (ntohs(arp->opcode) == 1)
 		printf("arp req\n");
 }
 
