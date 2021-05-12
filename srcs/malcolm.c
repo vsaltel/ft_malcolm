@@ -28,7 +28,7 @@ void	recv_arp(t_malcolm *mal)
 		ntohs(arp->opcode) == 1)
 	{
 		mac = mac_strconv(arp->sender_mac);
-		ip = inttohex(arp->sender_ip);
+		ip = ip_strconv(arp->sender_ip);
 		printf("An ARP request has been broadcast.\n"
 				"\tmac address of request : %s\n"
 				"\tIP address of request : %s\n",

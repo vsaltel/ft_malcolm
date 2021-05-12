@@ -38,7 +38,7 @@ char	*ip_strconv(const uint8_t *bytes)
 
 	i = 0;
 	y = 0;
-	buf = malloc(16)
+	buf = malloc(16);
 	while (i < 4 && y < 16)
 	{
 		if (i != 0)
