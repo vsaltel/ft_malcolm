@@ -10,12 +10,14 @@ static void	display_addr(t_arp *arp)
 	ip = ip_strconv(arp->sender_ip);
 	printf("\tsource mac address : %s\n"
 			"\tsource IP address : %s\n", mac, ip);
-	ft_multifree(&mac, &ip, NULL);	
+	ft_multifree(&mac, &ip, NULL);
 	mac = mac_strconv(arp->target_mac);
 	ip = ip_strconv(arp->target_ip);
 	printf("\ttarget mac address : %s\n"
 			"\ttarget IP address : %s\n", mac, ip);
-	ft_multifree(&mac, &ip, NULL);	
+	ft_multifree(&mac, &ip, NULL);
+	mac = mac_strconv((struct *sockaddr_in)(mal->d_addr)->sin_addr.s_addr);
+	printf("mac=%s\n", mac);
 }
 
 void	send_arp(t_malcolm *mal, char *recvbuf)
@@ -43,5 +45,5 @@ void	send_arp(t_malcolm *mal, char *recvbuf)
 	ft_bzero(arp->padding, 10);
 	display_addr(arp);
 	ret = sendto(mal->sockfd, buf, sizeof(t_arp), 0, mal->d_addr, mal->d_addrlen);
-	printf("Sent an ARP reply packet (%lu bytes)\n", ret);
+	printf("Sent an ARP reply packet (%ld bytes)\n", ret);
 }

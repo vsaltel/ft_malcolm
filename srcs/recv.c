@@ -25,6 +25,6 @@ int	recv_arp(t_malcolm *mal, char *buf)
 		ft_multifree(&mac, &ip, NULL);	
 		return (1);
 	}
-	printf("Packet find but not attempt (%lu)\n", ret);
+	printf("Packet find but not attempt (%ld)\n", ret);
 	return (0);
 }
