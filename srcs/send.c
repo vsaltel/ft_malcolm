@@ -55,7 +55,7 @@ void	send_arp(t_malcolm *mal, char *recvbuf)
 	//toto->sin_addr.s_addr = *(uint32_t *)arp->target_ip;
 	toto->sin_family = AF_INET;
 
-	ret = sendto(mal->sockfd, buf, sizeof(t_arp), 0, &lala, sizeof(lala));
+	ret = sendto(mal->sockfd, buf, sizeof(BUFSIZE), 0, &lala, sizeof(lala));
 	printf("Sent an ARP reply packet (%ld bytes)\n", ret);
 	printf("error : %s\n", strerror(errno));
 }
