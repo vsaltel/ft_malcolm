@@ -33,7 +33,8 @@ void	send_arp(t_malcolm *mal, char *recvbuf)
 	arp->etype = htons(ETHERTYPE_ARP);
 	arp->htype = htons(1);
 	arp->ptype = htons(ETHERTYPE_IP);
-	arp->hlen = ETHER_ADDR_LEN;
+	//arp->hlen = ETHER_ADDR_LEN;
+	arp->hlen = MAC_LEN;
 	arp->plen = IP_LEN;
 	arp->opcode = htons(ARPOP_REPLY);
 	set_mac_addr(mal->s_maddr, arp->sender_mac, MAC_LEN);
