@@ -7,6 +7,8 @@
 # define IP_STR_SIZE 129
 # define PING_TTL 64
 # define RECV_TIMEOUT 1
+# define IP_LEN 4
+# define MAC_LEN 6
 
 # include <stdio.h>
 # include <signal.h>

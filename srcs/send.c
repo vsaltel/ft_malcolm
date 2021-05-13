@@ -28,34 +28,35 @@ void	send_arp(t_malcolm *mal, char *recvbuf)
 
 	bef = (t_arp *)(recvbuf);
 	arp = (t_arp *)buf;
-	copy_bytes(arp->d_mac, bef->sender_mac, 6);
-	set_mac_addr(mal->s_maddr, arp->s_mac, 6);
+	copy_bytes(arp->d_mac, bef->sender_mac, MAC_LEN);
+	set_mac_addr(mal->s_maddr, arp->s_mac, MAC_LEN);
 	arp->etype = htons(ETHERTYPE_ARP);
 	arp->htype = htons(1);
 	arp->ptype = htons(ETHERTYPE_IP);
 	arp->hlen = ETHER_ADDR_LEN;
-	arp->plen = 4;
+	arp->plen = IP_LEN;
 	arp->opcode = htons(ARPOP_REPLY);
-	set_mac_addr(mal->s_maddr, arp->sender_mac, 6);
-	copy_bytes(arp->sender_ip, bef->target_ip, 4);
+	set_mac_addr(mal->s_maddr, arp->sender_mac, MAC_LEN);
+	copy_bytes(arp->sender_ip, bef->target_ip, IP_LEN);
 
 	uint64_t	empty;
 	empty = 0;
 	//copy_bytes(arp->target_mac, bef->sender_mac, 6);
-	copy_bytes(arp->target_mac, (uint8_t *)&empty, 6);
+	copy_bytes(arp->target_mac, (uint8_t *)&empty, MAC_LEN);
 
-	copy_bytes(arp->target_ip, bef->sender_ip, 4);
+	copy_bytes(arp->target_ip, bef->sender_ip, IP_LEN);
 	ft_bzero(arp->padding, 18);
 	display_addr(arp);
 
 	struct sockaddr lala;
 	struct sockaddr_in *toto;
 	toto = (struct sockaddr_in *)&lala;
-	copy_bytes((uint8_t *)&toto->sin_addr.s_addr, arp->target_ip, 4);
+	ft_memcpy(&toto->sin_addr.s_addr, arp->target_ip, IP_LEN);
+	//copy_bytes((uint8_t *)&toto->sin_addr.s_addr, arp->target_ip, 4);
 	//toto->sin_addr.s_addr = *(uint32_t *)arp->target_ip;
 	toto->sin_family = AF_INET;
 
-	ret = sendto(mal->sockfd, buf, sizeof(BUFSIZE), 0, &lala, sizeof(lala));
+	ret = sendto(mal->sockfd, buf, sizeof(t_arp), 0, &lala, sizeof(lala));
 	printf("Sent an ARP reply packet (%ld bytes)\n", ret);
 	printf("error : %s\n", strerror(errno));
 }
