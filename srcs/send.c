@@ -28,8 +28,8 @@ void	send_arp(t_malcolm *mal, char *recvbuf)
 
 	bef = (t_arp *)(recvbuf);
 	arp = (t_arp *)buf;
-	copy_bytes(arp->s_mac, bef->sender_mac, 6);
-	set_mac_addr(mal->s_maddr, arp->d_mac, 6);
+	copy_bytes(arp->d_mac, bef->sender_mac, 6);
+	set_mac_addr(mal->s_maddr, arp->s_mac, 6);
 	arp->etype = htons(ETHERTYPE_ARP);
 	arp->htype = htons(1);
 	arp->ptype = htons(ETHERTYPE_IP);
@@ -38,10 +38,12 @@ void	send_arp(t_malcolm *mal, char *recvbuf)
 	arp->opcode = htons(ARPOP_REPLY);
 	set_mac_addr(mal->s_maddr, arp->sender_mac, 6);
 	copy_bytes(arp->sender_ip, bef->target_ip, 4);
+
 	uint64_t	empty;
 	empty = 0;
 	//copy_bytes(arp->target_mac, bef->sender_mac, 6);
 	copy_bytes(arp->target_mac, (uint8_t *)&empty, 6);
+
 	copy_bytes(arp->target_ip, bef->sender_ip, 4);
 	ft_bzero(arp->padding, 18);
 	display_addr(arp);
@@ -55,5 +57,5 @@ void	send_arp(t_malcolm *mal, char *recvbuf)
 
 	ret = sendto(mal->sockfd, buf, sizeof(t_arp), 0, &lala, sizeof(lala));
 	printf("Sent an ARP reply packet (%ld bytes)\n", ret);
-	printf("error : %s", strerror(errno));
+	printf("error : %s\n", strerror(errno));
 }
