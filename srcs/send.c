@@ -38,7 +38,10 @@ void	send_arp(t_malcolm *mal, char *recvbuf)
 	arp->opcode = htons(ARPOP_REPLY);
 	set_mac_addr(mal->s_maddr, arp->sender_mac, 6);
 	copy_bytes(arp->sender_ip, bef->target_ip, 4);
-	copy_bytes(arp->target_mac, bef->sender_mac, 6);
+	uint64_t	empty;
+	empty = 0;
+	//copy_bytes(arp->target_mac, bef->sender_mac, 6);
+	copy_bytes(arp->target_mac, (uint8_t *)&empty, 6);
 	copy_bytes(arp->target_ip, bef->sender_ip, 4);
 	ft_bzero(arp->padding, 18);
 	display_addr(arp);
