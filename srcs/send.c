@@ -28,7 +28,7 @@ void	send_arp(t_malcolm *mal, char *recvbuf)
 
 	bef = (t_arp *)(recvbuf);
 	arp = (t_arp *)buf;
-	copy_bytes(arp->d_mac, bef->sender_mac, MAC_LEN);
+	ft_memcpy(arp->d_mac, bef->sender_mac, MAC_LEN);
 	set_mac_addr(mal->s_maddr, arp->s_mac, MAC_LEN);
 	arp->etype = htons(ETHERTYPE_ARP);
 	arp->htype = htons(1);
@@ -37,15 +37,12 @@ void	send_arp(t_malcolm *mal, char *recvbuf)
 	arp->plen = IP_LEN;
 	arp->opcode = htons(ARPOP_REPLY);
 	set_mac_addr(mal->s_maddr, arp->sender_mac, MAC_LEN);
-	copy_bytes(arp->sender_ip, bef->target_ip, IP_LEN);
+	ft_memcpy(arp->sender_ip, bef->target_ip, IP_LEN);
 
 	uint64_t	empty;
 	empty = 0;
-	//copy_bytes(arp->target_mac, bef->sender_mac, 6);
-	ft_memcpy(arp->target_mac, (uint8_t *)&empty, IP_LEN);
-	//copy_bytes(, , MAC_LEN);
-
-	copy_bytes(arp->target_ip, bef->sender_ip, IP_LEN);
+	ft_memcpy(arp->target_mac, (uint8_t *)&empty, MAC_LEN);
+	ft_memcpy(arp->target_ip, bef->sender_ip, IP_LEN);
 	ft_bzero(arp->padding, 18);
 	display_addr(arp);
 
