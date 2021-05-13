@@ -42,7 +42,8 @@ void	send_arp(t_malcolm *mal, char *recvbuf)
 	uint64_t	empty;
 	empty = 0;
 	//copy_bytes(arp->target_mac, bef->sender_mac, 6);
-	copy_bytes(arp->target_mac, (uint8_t *)&empty, MAC_LEN);
+	ft_memcpy(arp->target_mac, (uint8_t *)&empty, IP_LEN);
+	//copy_bytes(, , MAC_LEN);
 
 	copy_bytes(arp->target_ip, bef->sender_ip, IP_LEN);
 	ft_bzero(arp->padding, 18);
@@ -52,8 +53,6 @@ void	send_arp(t_malcolm *mal, char *recvbuf)
 	struct sockaddr_in *toto;
 	toto = (struct sockaddr_in *)&lala;
 	ft_memcpy(&toto->sin_addr.s_addr, arp->target_ip, IP_LEN);
-	//copy_bytes((uint8_t *)&toto->sin_addr.s_addr, arp->target_ip, 4);
-	//toto->sin_addr.s_addr = *(uint32_t *)arp->target_ip;
 	toto->sin_family = AF_INET;
 
 	ret = sendto(mal->sockfd, buf, sizeof(t_arp), 0, &lala, sizeof(lala));
