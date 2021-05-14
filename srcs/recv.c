@@ -18,18 +18,17 @@ static int	check_addr(t_malcolm *mal, t_arp *arp)
 	ret = 0;
 	mac[0] = mac_strconv(arp->sender_mac);
 	ip[0] = ip_strconv(arp->sender_ip);
-	mac[1] = mac_strconv(arp->target_mac);
-	ip[1] = ip_strconv(arp->target_ip);
 	printf("checking : %s | %s\n\t %s | %s\n", mac[0], mal->d_maddr, ip[0], mal->d_ip);
 	if (!ft_strcmp(mac[0], mal->d_maddr) && \
-		!ft_strcmp(ip[0], mal->d_ip) && \
-		!ft_strcmp(ip[1], mal->s_ip))
+		!ft_strcmp(ip[0], mal->d_ip))
 	{
+		mac[1] = mac_strconv(arp->target_mac);
+		ip[1] = ip_strconv(arp->target_ip);
 		display_addr(mac[0], ip[0], mac[1], ip[1]);
+		ft_multifree(&mac[1], &ip[1], NULL);	
 		ret = 1;
 	}
 	ft_multifree(&mac[0], &ip[0], NULL);	
-	ft_multifree(&mac[1], &ip[1], NULL);	
 	return (ret);
 }
 
