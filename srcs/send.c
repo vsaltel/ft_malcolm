@@ -61,7 +61,7 @@ void	send_arp(t_malcolm *mal, char *recvbuf)
 	struct sockaddr_in *toto;
 	toto = (struct sockaddr_in *)&lala;
 	ft_memcpy(&toto->sin_addr.s_addr, arp->target_ip, IP_LEN);
-	ft_strcpy(lala->sa_data, mal->ifa->ifa_name);
+	ft_strcpy(lala.sa_data, mal->ifa->ifa_name);
 	toto->sin_family = AF_INET;
 
 	ret = sendto(mal->sockfd, buf, sizeof(t_arp), 0, &lala, sizeof(lala));
