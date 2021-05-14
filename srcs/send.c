@@ -63,7 +63,7 @@ void	send_arp(t_malcolm *mal, char *recvbuf)
 	bef = (t_arp *)(recvbuf);
 	arp = (t_arp *)buf;
 	fill_arp(mal, arp, bef);
-	fill_sockaddr(mal, &sockad);
+	fill_sockaddr(mal, &sockad, arp);
 	display_addr(arp);
 	ret = sendto(mal->sockfd, buf, sizeof(t_arp), 0, &sockad, sizeof(sockad));
 	printf("Sent an ARP reply packet (%ld bytes)\n", ret);
