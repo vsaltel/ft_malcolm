@@ -33,7 +33,7 @@ static t_arp	*fill_arp(t_malcolm *mal, t_arp *arp, t_arp *bef)
 	arp->opcode = htons(ARPOP_REPLY);
 	set_mac_addr(mal->s_maddr, arp->sender_mac, MAC_LEN);
 	//ft_memcpy(arp->sender_ip, bef->target_ip, IP_LEN);
-	set_ip_addr(mal->s_ip, arp->send_ip, IP_LEN);
+	set_ip_addr(mal->s_ip, arp->sender_ip, IP_LEN);
 	//ft_memcpy(arp->target_mac, (uint8_t *)&empty, MAC_LEN);
 	set_mac_addr(mal->d_maddr, arp->target_mac, MAC_LEN);
 	//ft_memcpy(arp->target_ip, bef->sender_ip, IP_LEN);
@@ -48,7 +48,7 @@ static struct sockaddr	*fill_sockaddr(t_malcolm *mal, struct sockaddr *sockad)
 
 	sockadin = (struct sockaddr_in *)&sockad;
 	ft_memcpy(&sockadin->sin_addr.s_addr, arp->target_ip, IP_LEN);
-	ft_strcpy(sockad.sa_data, mal->ifa->ifa_name);
+	ft_strcpy(sockad->sa_data, mal->ifa->ifa_name);
 	sockadin->sin_family = AF_INET;
 }
 
