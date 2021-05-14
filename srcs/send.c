@@ -50,6 +50,7 @@ static struct sockaddr	*fill_sockaddr(t_malcolm *mal, struct sockaddr *sockad, t
 	ft_memcpy(&sockadin->sin_addr.s_addr, arp->target_ip, IP_LEN);
 	ft_strcpy(sockad->sa_data, mal->ifa->ifa_name);
 	sockadin->sin_family = AF_INET;
+	return (sockad);
 }
 
 void	send_arp(t_malcolm *mal, char *recvbuf)
