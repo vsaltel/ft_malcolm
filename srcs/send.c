@@ -18,6 +18,32 @@ static void	display_addr(t_arp *arp)
 	ft_multifree(&mac, &ip, NULL);
 }
 
+static t_arp	*fill_arp(t_malcolm *mal, t_arp *arp, t_arp *bef)
+{
+	uint64_t	empty;
+
+	empty = 0;
+	ft_memcpy(arp->d_mac, bef->sender_mac, MAC_LEN);
+	set_mac_addr(mal->s_maddr, arp->s_mac, MAC_LEN);
+
+	arp->etype = htons(ETHERTYPE_ARP);
+	arp->htype = htons(1);
+	arp->ptype = htons(ETHERTYPE_IP);
+	//arp->hlen = ETHER_ADDR_LEN;
+	arp->hlen = MAC_LEN;
+	arp->plen = IP_LEN;
+	arp->opcode = htons(ARPOP_REPLY);
+
+	set_mac_addr(mal->s_maddr, arp->sender_mac, MAC_LEN);
+	ft_memcpy(arp->sender_ip, bef->target_ip, IP_LEN);
+
+	ft_memcpy(arp->target_mac, (uint8_t *)&empty, MAC_LEN);
+	ft_memcpy(arp->target_ip, bef->sender_ip, IP_LEN);
+
+	ft_bzero(arp->padding, 18);
+
+	return (arp);
+}
 void	send_arp(t_malcolm *mal, char *recvbuf)
 {
 	ssize_t		ret;
@@ -28,23 +54,7 @@ void	send_arp(t_malcolm *mal, char *recvbuf)
 
 	bef = (t_arp *)(recvbuf);
 	arp = (t_arp *)buf;
-	ft_memcpy(arp->d_mac, bef->sender_mac, MAC_LEN);
-	set_mac_addr(mal->s_maddr, arp->s_mac, MAC_LEN);
-	arp->etype = htons(ETHERTYPE_ARP);
-	arp->htype = htons(1);
-	arp->ptype = htons(ETHERTYPE_IP);
-	//arp->hlen = ETHER_ADDR_LEN;
-	arp->hlen = MAC_LEN;
-	arp->plen = IP_LEN;
-	arp->opcode = htons(ARPOP_REPLY);
-	set_mac_addr(mal->s_maddr, arp->sender_mac, MAC_LEN);
-	ft_memcpy(arp->sender_ip, bef->target_ip, IP_LEN);
-
-	uint64_t	empty;
-	empty = 0;
-	ft_memcpy(arp->target_mac, (uint8_t *)&empty, MAC_LEN);
-	ft_memcpy(arp->target_ip, bef->sender_ip, IP_LEN);
-	ft_bzero(arp->padding, 18);
+	fill_arp(mal, arp, bef);
 	display_addr(arp);
 
 	struct sockaddr lala;
