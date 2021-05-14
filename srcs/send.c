@@ -48,7 +48,8 @@ static struct sockaddr	*fill_sockaddr(t_malcolm *mal, struct sockaddr *sockad, t
 
 	sockadin = (struct sockaddr_in *)&sockad;
 	ft_memcpy(&sockadin->sin_addr.s_addr, arp->target_ip, IP_LEN);
-	ft_strcpy(sockad->sa_data, mal->ifa->ifa_name);
+	//ft_strcpy(sockad->sa_data, mal->ifa->ifa_name);
+	ft_memcpy(sockad->sa_data, mal->ifa->ifa_name, ft_strlen(mal->ifa->ifa_name));
 	sockadin->sin_family = AF_INET;
 	return (sockad);
 }
