@@ -15,6 +15,7 @@ static int	check_addr(t_malcolm *mal, t_arp *arp)
 	char		*ip[2];
 	int			ret;
 
+	printf("checking\n");
 	ret = 0;
 	mac[0] = mac_strconv(arp->sender_mac);
 	ip[0] = ip_strconv(arp->sender_ip);
