@@ -43,7 +43,7 @@ typedef struct s_arp
 	uint8_t			sender_ip[IP_LEN];
 	uint8_t			target_mac[MAC_LEN];
 	uint8_t			target_ip[IP_LEN];
-	uint8_t			padding[PADDING_LEN];
+//	uint8_t			padding[PADDING_LEN];
 }				t_arp;
 
 typedef struct s_pckt

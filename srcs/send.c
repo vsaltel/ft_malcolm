@@ -38,7 +38,7 @@ static t_arp	*fill_arp(t_malcolm *mal, t_arp *arp, t_arp *bef)
 	set_mac_addr(mal->d_maddr, arp->target_mac, MAC_LEN);
 	//ft_memcpy(arp->target_ip, bef->sender_ip, IP_LEN);
 	set_ip_addr(mal->d_ip, arp->target_ip, IP_LEN);
-	ft_bzero(arp->padding, PADDING_LEN);
+	//ft_bzero(arp->padding, PADDING_LEN);
 	return (arp);
 }
 

@@ -9,7 +9,7 @@ int	recv_arp(t_malcolm *mal, char *buf)
 
 	ret = recvfrom(mal->sockfd, buf, BUFSIZE, 0, mal->d_addr, &mal->d_addrlen);
 	arp = (t_arp *)(buf);
-	if (ret >= (ssize_t)(0 + sizeof(t_arp)) &&
+	if (ret >= (ssize_t)(sizeof(t_arp)) &&
 		ntohs(arp->opcode) == ARPOP_REQUEST)
 	{
 		mac = mac_strconv(arp->sender_mac);
