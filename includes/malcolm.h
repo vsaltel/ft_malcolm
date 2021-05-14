@@ -9,6 +9,7 @@
 # define RECV_TIMEOUT 1
 # define IP_LEN 4
 # define MAC_LEN 6
+# define PADDING_LEN 20
 
 # include <stdio.h>
 # include <signal.h>
@@ -30,19 +31,19 @@
 
 typedef struct s_arp
 {
-	uint8_t			s_mac[6];
-	uint8_t			d_mac[6];
+	uint8_t			s_mac[MAC_LEN];
+	uint8_t			d_mac[MAC_LEN];
 	uint16_t		etype;
 	uint16_t		htype;
 	uint16_t		ptype;
 	uint8_t			hlen;
 	uint8_t			plen;
 	uint16_t		opcode;
-	uint8_t			sender_mac[6];
-	uint8_t			sender_ip[4];
-	uint8_t			target_mac[6];
-	uint8_t			target_ip[4];
-	unsigned char	padding[18];
+	uint8_t			sender_mac[MAC_LEN];
+	uint8_t			sender_ip[IP_LEN];
+	uint8_t			target_mac[MAC_LEN];
+	uint8_t			target_ip[IP_LEN];
+	uint8_t			padding[PADDING_LEN];
 }				t_arp;
 
 typedef struct s_pckt
