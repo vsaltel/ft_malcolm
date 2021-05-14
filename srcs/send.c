@@ -20,9 +20,6 @@ static void	display_addr(t_arp *arp)
 
 static t_arp	*fill_arp(t_malcolm *mal, t_arp *arp, t_arp *bef)
 {
-	uint64_t	empty;
-
-	empty = 0;
 	ft_memcpy(arp->d_mac, bef->sender_mac, MAC_LEN);
 	set_mac_addr(mal->s_maddr, arp->s_mac, MAC_LEN);
 	arp->etype = htons(ETHERTYPE_ARP);
