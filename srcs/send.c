@@ -42,7 +42,7 @@ static t_arp	*fill_arp(t_malcolm *mal, t_arp *arp, t_arp *bef)
 	return (arp);
 }
 
-static struct sockaddr	*fill_sockaddr(t_malcolm *mal, struct sockaddr *sockad)
+static struct sockaddr	*fill_sockaddr(t_malcolm *mal, struct sockaddr *sockad, t_arp *arp)
 {
 	struct sockaddr_in *sockadin;
 
