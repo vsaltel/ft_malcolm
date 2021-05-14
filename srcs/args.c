@@ -40,7 +40,7 @@ int	check_mac(char *mac)
 	{
 		if (mac[i] == ':')
 		{
-			if (n > 2)
+			if (n > 2 || n < 2)
 				return (1);
 			n = 0;
 			w++;
