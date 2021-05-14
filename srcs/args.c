@@ -46,7 +46,8 @@ int	check_mac(char *mac)
 			w++;
 		}
 		else if (!(mac[i] >= '0' && mac[i] <= '9') && \
-			!(mac[i] >= 'a' && mac[i] <= 'f'))
+			!(mac[i] >= 'A' && mac[i] <= 'F') && \
+			!(mac[i] >= 'a' && mac[i] <= 'a'))
 			return (1);
 		else
 			n++;
@@ -59,10 +60,10 @@ int	get_args(t_malcolm *mal, int ac, char **av)
 {
 	if (ac < 5 || ac > 5)
 		return (err_ret("bad number of arguments", NULL, 1));
-	mal->s_ip = ft_strdup(av[1]);	
-	mal->s_maddr = ft_strdup(av[2]);	
-	mal->d_ip = ft_strdup(av[3]);	
-	mal->d_maddr = ft_strdup(av[4]);	
+	mal->s_ip = ft_strdup(av[1]);
+	mal->s_maddr = ft_strupper(ft_strdup(av[2]));
+	mal->d_ip = ft_strdup(av[3]);
+	mal->d_maddr = ft_strupper(ft_strdup(av[4]));
 	if (check_ip(mal->s_ip))
 		return (err_ret("ip address malformed", mal->s_ip, 1));
 	if (check_ip(mal->d_ip))
