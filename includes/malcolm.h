@@ -77,12 +77,6 @@ void	free_args(t_malcolm *mal);
 void	init_malcolm(t_malcolm *mal);
 
 /*
-** srcs/conv_addr.c
-*/
-
-char			*set_inetaddr(struct sockaddr *sa);
-
-/*
 ** srcs/malcolm.c
 */
 
