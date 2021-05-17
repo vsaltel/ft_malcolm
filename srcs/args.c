@@ -68,8 +68,8 @@ int	get_args(t_malcolm *mal, int ac, char **av)
 	mal->d_info = get_addr_info(mal, mal->d_ip);
 	if (!mal->d_info)
 		return (2);
-	mal->d_addr = d_info->ai_addr;
-	mal->d_addrlen = d_info->ai_addrlen;
+	mal->d_addr = mal->d_info->ai_addr;
+	mal->d_addrlen = mal->d_info->ai_addrlen;
 	mal->d_ip = set_inetaddr(mal, mal->d_info);
 	mal->s_info = get_addr_info(mal, mal->s_ip);
 	if (!mal->s_info)
