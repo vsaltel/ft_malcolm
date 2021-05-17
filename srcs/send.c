@@ -8,13 +8,15 @@ static void	display_addr(t_arp *arp)
 	printf("Sending an ARP reply to the target address with spoofed source\n");
 	mac = mac_strconv(arp->sender_mac);
 	ip = ip_strconv(arp->sender_ip);
-	printf("\tsource mac address : %s\n"
-		"\tsource IP address : %s\n", mac, ip);
+	if (mal->v)
+		printf("\tsource mac address : %s\n"
+			"\tsource IP address : %s\n", mac, ip);
 	ft_multifree(&mac, &ip, NULL);
 	mac = mac_strconv(arp->target_mac);
 	ip = ip_strconv(arp->target_ip);
-	printf("\ttarget mac address : %s\n"
-		"\ttarget IP address : %s\n", mac, ip);
+	if (mal->v)
+		printf("\ttarget mac address : %s\n"
+			"\ttarget IP address : %s\n", mac, ip);
 	ft_multifree(&mac, &ip, NULL);
 }
 

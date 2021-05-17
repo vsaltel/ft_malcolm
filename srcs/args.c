@@ -29,18 +29,34 @@ int	check_mac(char *mac)
 	return (w < 6 || w > 6);
 }
 
+int	get_opt(t_malcolm *mal, char *arg)
+{
+	int	i;
+
+	i = 1;
+	while (arg[i])
+	{
+		if (arg[i] == 'v')
+			mal->v = 1;
+		else if (arg[i] == 'l')
+			mal->l = 1;
+		else
+			return (1);
+	}
+	return (0);
+}
+
 int	get_args(t_malcolm *mal, int ac, char **av)
 {
 	int	i;
+
 	if (ac < 5 || ac > 6)
 		return (err_ret("bad number of arguments", NULL, 1));
 	i = 1;
-	if (av[i][0] == '-')
+	while (av[i][0] == '-')
 	{
-		if (av[i][1] && av[i][1] == 'v')
-			mal->v = 1;
-		else
-			return (err_ret("bad option", mal->s_maddr, 1));
+		if (get_opt(mal, av[i]))
+			return (err_ret("bad option", NULL, 1));
 		i++;
 	}
 	mal->s_name = ft_strdup(av[i++]);

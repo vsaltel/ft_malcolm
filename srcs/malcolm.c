@@ -48,7 +48,12 @@ int	malcolm(t_malcolm *mal)
 	if (mal->ifa)
 	{
 		printf("Found available interface : %s\n", mal->ifa->ifa_name);
-		while (!ret)
+		if (mal->l)
+		{
+			while (!ret)
+				ret = exec(mal);
+		}
+		else
 			ret = exec(mal);
 	}
 	return (ret);

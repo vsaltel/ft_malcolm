@@ -43,5 +43,7 @@ int	recv_arp(t_malcolm *mal, char *buf)
 		ntohs(arp->opcode) == ARPOP_REQUEST && \
 		check_addr(mal, arp))
 		return (1);
+	if (mal->v)
+		dprintf(2, "packet received but not the expected one (%ld len)", ret);
 	return (0);
 }
