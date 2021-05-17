@@ -45,11 +45,14 @@ typedef struct s_pckt
 
 typedef struct s_malcolm
 {
-	struct addrinfo	*info;
+	struct addrinfo	*s_info;
+	struct addrinfo	*d_info;
 	struct ifaddrs	*ifap;
 	struct ifaddrs	*ifa;
+	char			*s_name;
 	char			*s_maddr;
 	char			*s_ip;
+	char			*d_name;
 	char			*d_maddr;
 	char			*d_ip;
 	struct sockaddr	*d_addr;
@@ -98,6 +101,7 @@ int	recv_arp(t_malcolm *mal, char *buf);
 struct addrinfo	*reverse_dns_info(char *host, char *serv,
 					int family, int socktype);
 struct addrinfo	*get_addr_info(t_malcolm *mal, char *host);
+char	*set_inetaddr(t_malcolm *mal, struct addrinfo *info);
 
 /*
 ** srcs/send_msg.c

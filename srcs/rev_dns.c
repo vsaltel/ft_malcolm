@@ -25,7 +25,16 @@ struct addrinfo	*get_addr_info(t_malcolm *mal, char *host)
 	info = reverse_dns_info(host, NULL, AF_INET, 0);
 	if (!info)
 		return (NULL);
-	mal->d_addr = info->ai_addr;
-	mal->d_addrlen = info->ai_addrlen;
 	return (info);
+}
+
+char	*set_inetaddr(t_malcolm *mal, struct addrinfo *info)
+{
+	struct sockaddr_in  *sin;
+	char                str[IP_STR_SIZE];
+
+	sin = (struct sockaddr_in *)sa;
+	if (!inet_ntop(AF_INET, &sin->sin_addr, str, sizeof(str)))
+		return (ft_strdup("CONVERTION_FAIL"));
+	return (ft_strdup(str));
 }

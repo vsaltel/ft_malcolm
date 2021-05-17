@@ -60,10 +60,21 @@ int	get_args(t_malcolm *mal, int ac, char **av)
 {
 	if (ac < 5 || ac > 5)
 		return (err_ret("bad number of arguments", NULL, 1));
-	mal->s_ip = ft_strdup(av[1]);
+	mal->s_name = ft_strdup(av[1]);
 	mal->s_maddr = ft_strupper(ft_strdup(av[2]));
-	mal->d_ip = ft_strdup(av[3]);
+	mal->d_name = ft_strdup(av[3]);
 	mal->d_maddr = ft_strupper(ft_strdup(av[4]));
+
+	mal->d_info = get_addr_info(mal, mal->d_ip);
+	if (!mal->d_info)
+		return (2);
+	mal->d_addr = d_info->ai_addr;
+	mal->d_addrlen = d_info->ai_addrlen;
+	mal->d_ip = set_inetaddr(mal, d_info);
+	mal->info = get_addr_info(mal, mal->s_ip);
+	if (!mal->info)
+		return (2);
+	mal->s_ip = set_inetaddr(mal, s_info);
 	/*
 	if (check_ip(mal->s_ip))
 		return (err_ret("ip address malformed", mal->s_ip, 1));

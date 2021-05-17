@@ -24,9 +24,6 @@ int	malcolm(t_malcolm *mal)
 {
 	int		ret;
 
-	mal->info = get_addr_info(mal, mal->d_ip);
-	if (!mal->info)
-		return (2);
 	mal->ifap = get_interface(mal);
 	if (!mal->ifap)
 		return (3);
