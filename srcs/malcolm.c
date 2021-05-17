@@ -34,7 +34,5 @@ int	malcolm(t_malcolm *mal)
 		while (!ret)
 			ret = exec(mal);
 	}
-	freeifaddrs(mal->ifap);
-	freeaddrinfo(mal->info);
 	return (0);
 }
