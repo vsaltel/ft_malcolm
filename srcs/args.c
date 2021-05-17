@@ -35,7 +35,7 @@ int	get_args(t_malcolm *mal, int ac, char **av)
 	if (ac < 5 || ac > 6)
 		return (err_ret("bad number of arguments", NULL, 1));
 	i = 1;
-	if (av[i][0] = '-')
+	if (av[i][0] == '-')
 	{
 		if (av[i][1] && av[i][1] == 'v')
 			mal->v = 1;
