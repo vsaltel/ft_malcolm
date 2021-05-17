@@ -1,9 +1,9 @@
 #include "malcolm.h"
 
-static void	exec(t_malcolm *mal)
+static int	exec(t_malcolm *mal)
 {
-	char			recvbuf[BUFSIZE];
-	int				ret;
+	char	recvbuf[BUFSIZE];
+	int		ret;
 
 	mal->sockfd = set_socket(AF_PACKET, SOCK_RAW, ETH_P_ARP);
 	if (mal->sockfd <= 0)
@@ -17,10 +17,13 @@ static void	exec(t_malcolm *mal)
 		return (5);
 	send_arp(mal, recvbuf);
 	close(mal->sockfd);
+	return (0);
 }
 
 int	malcolm(t_malcolm *mal)
 {
+	int		ret;
+
 	mal->info = get_addr_info(mal, mal->d_ip);
 	if (!mal->info)
 		return (2);
@@ -30,8 +33,9 @@ int	malcolm(t_malcolm *mal)
 	if (mal->ifa)
 	{
 		printf("Found available interface : %s\n", mal->ifa->ifa_name);
-		while (1)
-			exec(mal);
+		ret = 0;
+		while (!ret)
+			ret = exec(mal);
 	}
 	freeifaddrs(mal->ifap);
 	freeaddrinfo(mal->info);
