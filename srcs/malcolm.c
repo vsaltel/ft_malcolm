@@ -41,7 +41,7 @@ int	malcolm(t_malcolm *mal)
 
 	if (rev_mal_info(mal))
 		return (3);
-		printf("there\n");
+	printf("there\n");
 	mal->ifap = get_interface(mal);
 	if (!mal->ifap)
 		return (4);
