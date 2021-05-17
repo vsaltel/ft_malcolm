@@ -4,9 +4,9 @@ static void	print_input(t_malcolm *mal)
 {
 	printf("Input :\n");
 	printf("source mac address : %s\n"
-		"\tsource IP address : %s\n", mal->s_maddr, mal->s_ip);
+		"source IP address : %s\n", mal->s_maddr, mal->s_ip);
 	printf("dest mac address : %s\n"
-		"\tdest IP address : %s\n", mal->d_maddr, mal->d_ip);
+		"dest IP address : %s\n", mal->d_maddr, mal->d_ip);
 }
 
 static int	rev_mal_info(t_malcolm *mal)
