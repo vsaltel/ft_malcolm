@@ -23,7 +23,7 @@ char	*set_inetaddr(struct addrinfo *info)
 	struct sockaddr_in  *sin;
 	char                str[IP_STR_LEN];
 
-	sin = (struct sockaddr_in *)sa;
+	sin = (struct sockaddr_in *)sa->ai_addr;
 	if (!inet_ntop(AF_INET, &sin->sin_addr, str, sizeof(str)))
 		return (ft_strdup("CONVERTION_FAIL"));
 	return (ft_strdup(str));
