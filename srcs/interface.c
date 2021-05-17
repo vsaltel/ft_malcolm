@@ -23,7 +23,6 @@ struct ifaddrs	*get_interface(t_malcolm *mal)
 	if (getifaddrs(&ifap))
 		return (NULL);
 	interfaces = ft_strsplit(INTERFACES, ' ');
-	sa = NULL;
 	ifa = ifap;
 	while (ifa)
 	{
