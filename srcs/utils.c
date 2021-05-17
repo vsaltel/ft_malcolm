@@ -24,5 +24,5 @@ int	err_ret(char *err, char *arg, int ret)
 
 void	print_usage(void)
 {
-	dprintf(2, "usage: ft_malcolm [-v] source_ip source_mac dest_ip dest_mac\n");
+	dprintf(2, "usage: ft_malcolm [-lv] source_ip source_mac dest_ip dest_mac\n");
 }

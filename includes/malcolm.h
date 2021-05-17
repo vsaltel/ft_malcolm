@@ -76,8 +76,8 @@ int				get_args(t_malcolm *ping, int ac, char **av);
 ** srcs/args_utils.c
 */
 
-void	free_args(t_malcolm *mal);
-void	init_malcolm(t_malcolm *mal);
+void			free_args(t_malcolm *mal);
+void			init_malcolm(t_malcolm *mal);
 
 /*
 ** srcs/malcolm.c
@@ -86,10 +86,10 @@ void	init_malcolm(t_malcolm *mal);
 int				malcolm(t_malcolm *mal);
 
 /*
-** srcs/recv_msg.c
+** srcs/recv.c
 */
 
-int	recv_arp(t_malcolm *mal, char *buf);
+int				recv_arp(t_malcolm *mal, char *buf);
 
 /*
 ** srcs/rev_dns.c
@@ -97,25 +97,34 @@ int	recv_arp(t_malcolm *mal, char *buf);
 
 struct addrinfo	*reverse_dns_info(char *host, char *serv,
 					int family, int socktype);
-//struct addrinfo	*get_addr_info(t_malcolm *mal, char *host);
-char	*set_inetaddr(struct addrinfo *info);
+char			*set_inetaddr(struct addrinfo *info);
 
 /*
-** srcs/send_msg.c
+** srcs/send.c
 */
 
-void	send_arp(t_malcolm *mal, char *recvbuf);
+void			send_arp(t_malcolm *mal, char *recvbuf);
 
 /*
 ** srcs/convert.c
 */
 
-char			*ip_strconv(const uint8_t *bytes);
-char			*mac_strconv(const uint8_t *bytes);
 int				hextoint(const char *str);
 int				dectoint(const char *str);
-void			set_mac_addr(char *src, uint8_t *dst, int len);
+
+/*
+** srcs/ip_utils.c
+*/
+
+char			*ip_strconv(const uint8_t *bytes);
 void			set_ip_addr(char *src, uint8_t *dst, int len);
+
+/*
+** srcs/mac_utils.c
+*/
+
+char			*mac_strconv(const uint8_t *bytes);
+void			set_mac_addr(char *src, uint8_t *dst, int len);
 
 /*
 ** srcs/socket.c

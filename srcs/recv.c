@@ -44,6 +44,6 @@ int	recv_arp(t_malcolm *mal, char *buf)
 		check_addr(mal, arp))
 		return (1);
 	if (mal->v)
-		dprintf(2, "packet received but not the expected one (%ld len)", ret);
+		dprintf(2, "packet received but not the expected one (%ld len)\n", ret);
 	return (0);
 }
