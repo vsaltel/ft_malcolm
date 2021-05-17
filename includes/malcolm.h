@@ -95,7 +95,7 @@ int	recv_arp(t_malcolm *mal, char *buf);
 struct addrinfo	*reverse_dns_info(char *host, char *serv,
 					int family, int socktype);
 //struct addrinfo	*get_addr_info(t_malcolm *mal, char *host);
-int	rev_mal_info(t_malcolm *mal)
+int	rev_mal_info(t_malcolm *mal);
 char	*set_inetaddr(t_malcolm *mal, struct addrinfo *info);
 
 /*
