@@ -1,6 +1,6 @@
 #include "malcolm.h"
 
-static void	display_addr(t_arp *arp)
+static void	display_addr(t_arp *arp, int verbose)
 {
 	char		*mac;
 	char		*ip;
@@ -8,13 +8,13 @@ static void	display_addr(t_arp *arp)
 	printf("Sending an ARP reply to the target address with spoofed source\n");
 	mac = mac_strconv(arp->sender_mac);
 	ip = ip_strconv(arp->sender_ip);
-	if (mal->v)
+	if (verbose)
 		printf("\tsource mac address : %s\n"
 			"\tsource IP address : %s\n", mac, ip);
 	ft_multifree(&mac, &ip, NULL);
 	mac = mac_strconv(arp->target_mac);
 	ip = ip_strconv(arp->target_ip);
-	if (mal->v)
+	if (verbose)
 		printf("\ttarget mac address : %s\n"
 			"\ttarget IP address : %s\n", mac, ip);
 	ft_multifree(&mac, &ip, NULL);
@@ -61,7 +61,7 @@ void	send_arp(t_malcolm *mal, char *recvbuf)
 	arp = (t_arp *)buf;
 	fill_arp(mal, arp, bef);
 	fill_sockaddr(mal, &sockad, arp);
-	display_addr(arp);
+	display_addr(arp, mal->v);
 	ret = sendto(mal->sockfd, buf, sizeof(t_arp), 0, &sockad, sizeof(sockad));
 	printf("Sent an ARP reply packet (%ld bytes)\n", ret);
 }
