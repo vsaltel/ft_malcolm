@@ -40,7 +40,10 @@ int	rev_mal_info(t_malcolm *mal)
 	mal->d_ip = set_inetaddr(mal->d_info);
 	mal->d_info = reverse_dns_info(mal->s_name, NULL, AF_INET, 0);
 	if (!mal->s_info)
+	{
+		printf("2\n");
 		return (1);
+	}
 	mal->s_ip = set_inetaddr(mal->s_info);
 	return (0);
 }
