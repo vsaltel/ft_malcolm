@@ -64,10 +64,12 @@ int	get_args(t_malcolm *mal, int ac, char **av)
 	mal->s_maddr = ft_strupper(ft_strdup(av[2]));
 	mal->d_ip = ft_strdup(av[3]);
 	mal->d_maddr = ft_strupper(ft_strdup(av[4]));
+	/*
 	if (check_ip(mal->s_ip))
 		return (err_ret("ip address malformed", mal->s_ip, 1));
 	if (check_ip(mal->d_ip))
 		return (err_ret("ip address malformed", mal->s_ip, 1));
+	*/
 	if (check_mac(mal->s_maddr))
 		return (err_ret("mac address malformed", mal->s_maddr, 1));
 	if (check_mac(mal->d_maddr))
