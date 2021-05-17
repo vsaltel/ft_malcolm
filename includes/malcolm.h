@@ -5,6 +5,7 @@
 # define IP_STR_SIZE 129
 # define PING_TTL 64
 # define RECV_TIMEOUT 1
+# define IP_STR_LEN 17
 # define IP_LEN 4
 # define MAC_LEN 6
 # define INTERFACES "en0 enp0s3"

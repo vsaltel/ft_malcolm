@@ -18,10 +18,10 @@ struct addrinfo	*reverse_dns_info(char *host, char *serv, int family,
 	return (res);
 }
 
-char	*set_inetaddr(t_malcolm *mal, struct addrinfo *info)
+char	*set_inetaddr(struct addrinfo *info)
 {
 	struct sockaddr_in  *sin;
-	char                str[IP_STR_SIZE];
+	char                str[IP_STR_LEN];
 
 	sin = (struct sockaddr_in *)sa;
 	if (!inet_ntop(AF_INET, &sin->sin_addr, str, sizeof(str)))
@@ -31,15 +31,15 @@ char	*set_inetaddr(t_malcolm *mal, struct addrinfo *info)
 
 int	rev_mal_info(t_malcolm *mal)
 {
-	mal->d_info = reverse_dns_info(mal->d_name, NULL, AF_INET, 0)
+	mal->d_info = reverse_dns_info(mal->d_name, NULL, AF_INET, 0);
 	if (!mal->d_info)
 		return (1);
 	mal->d_addr = mal->d_info->ai_addr;
 	mal->d_addrlen = mal->d_info->ai_addrlen;
-	mal->d_ip = set_inetaddr(mal, mal->d_info);
-	mal->d_info = reverse_dns_info(mal->s_name, NULL, AF_INET, 0)
+	mal->d_ip = set_inetaddr(mal->d_info);
+	mal->d_info = reverse_dns_info(mal->s_name, NULL, AF_INET, 0);
 	if (!mal->s_info)
 		return (1);
-	mal->s_ip = set_inetaddr(mal, mal->s_info);
+	mal->s_ip = set_inetaddr(mal->s_info);
 	return (0);
 }
