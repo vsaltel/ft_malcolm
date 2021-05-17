@@ -9,7 +9,7 @@ char	*ip_strconv(const uint8_t *bytes)
 	i = 0;
 	y = 0;
 	buf = malloc(16);
-	while (i < 4 && y < 16)
+	while (buf && i < 4 && y < 16)
 	{
 		if (i != 0)
 			buf[y - 1] = '.';
@@ -24,8 +24,8 @@ char	*ip_strconv(const uint8_t *bytes)
 		buf[y + 2] = bytes[i] % 10 + '0';
 		i += 1;
 		y += 4;
+		buf[y - 1] = '\0';
 	}
-	buf[y - 1] = '\0';
 	return (buf);
 }
 
