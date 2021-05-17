@@ -33,7 +33,10 @@ int	rev_mal_info(t_malcolm *mal)
 {
 	mal->d_info = reverse_dns_info(mal->d_name, NULL, AF_INET, 0);
 	if (!mal->d_info)
+	{
+		printf("there\n");
 		return (1);
+	}
 	mal->d_addr = mal->d_info->ai_addr;
 	mal->d_addrlen = mal->d_info->ai_addrlen;
 	mal->d_ip = set_inetaddr(mal->d_info);
