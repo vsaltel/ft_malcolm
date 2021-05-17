@@ -46,6 +46,7 @@ typedef struct s_pckt
 
 typedef struct s_malcolm
 {
+	int				v;
 	struct addrinfo	*s_info;
 	struct addrinfo	*d_info;
 	struct ifaddrs	*ifap;

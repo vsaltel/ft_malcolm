@@ -18,6 +18,7 @@ void	free_args(t_malcolm *mal)
 
 void	init_malcolm(t_malcolm *mal)
 {
+	mal->v = 0;
 	mal->s_maddr = NULL;
 	mal->s_name = NULL;
 	mal->s_ip = NULL;
