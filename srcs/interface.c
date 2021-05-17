@@ -1,23 +1,35 @@
 #include "malcolm.h"
 
+static int	cmptab(char **tab, char *cmp)
+{
+	int	i;
+
+	i = 0;
+	while (tab[i])
+	{
+		if (!ft_strcmp(tab[i], cmp))
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 struct ifaddrs	*get_interface(t_malcolm *mal)
 {
 	struct ifaddrs		*ifap;
 	struct ifaddrs		*ifa;
-	struct sockaddr_in	*sa;
-	char				*addr;
+	char				**interfaces;
 
 	if (getifaddrs(&ifap))
 		return (NULL);
+	interfaces = ft_strsplit(INTERFACES, ' ');
 	sa = NULL;
 	ifa = ifap;
 	while (ifa)
 	{
 		if (ifa->ifa_addr && ifa->ifa_addr->sa_family == AF_INET)
 		{
-			sa = (struct sockaddr_in *)ifa->ifa_addr;
-			addr = inet_ntoa(sa->sin_addr);
-			if (!ft_strncmp(addr, mal->s_ip, 3))
+			if (!cmptab(interfaces, ifa->ifa_name))
 			{
 				mal->ifa = ifa;
 				break ;
@@ -25,5 +37,6 @@ struct ifaddrs	*get_interface(t_malcolm *mal)
 		}
 		ifa = ifa->ifa_next;
 	}
+	ft_tabfree(interfaces);
 	return (ifap);
 }

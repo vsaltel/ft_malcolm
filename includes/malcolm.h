@@ -7,6 +7,7 @@
 # define RECV_TIMEOUT 1
 # define IP_LEN 4
 # define MAC_LEN 6
+# define INTERFACES "en0 enp0s3"
 
 # include <stdio.h>
 # include <signal.h>
