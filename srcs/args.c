@@ -51,7 +51,5 @@ int	get_args(t_malcolm *mal, int ac, char **av)
 		return (err_ret("mac address malformed", mal->s_maddr, 1));
 	if (check_mac(mal->d_maddr))
 		return (err_ret("mac address malformed", mal->d_maddr, 1));
-	if (rev_mal_info(mal))
-		return (1);
 	return (0);
 }
