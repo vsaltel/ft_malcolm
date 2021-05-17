@@ -42,6 +42,7 @@ int	get_opt(t_malcolm *mal, char *arg)
 			mal->l = 1;
 		else
 			return (1);
+		i++;
 	}
 	return (0);
 }
@@ -58,7 +59,6 @@ int	get_args(t_malcolm *mal, int ac, char **av)
 		if (get_opt(mal, av[i]))
 			return (err_ret("bad option", NULL, 1));
 		i++;
-	printf("there\n");
 	}
 	mal->s_name = ft_strdup(av[i++]);
 	mal->s_maddr = ft_strupper(ft_strdup(av[i++]));
