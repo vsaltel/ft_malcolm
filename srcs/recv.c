@@ -18,7 +18,6 @@ static int	check_addr(t_malcolm *mal, t_arp *arp)
 	ret = 0;
 	mac[0] = mac_strconv(arp->sender_mac);
 	ip[0] = ip_strconv(arp->sender_ip);
-	printf("checking : %s | %s\n\t %s | %s\n", mac[0], mal->d_maddr, ip[0], mal->d_ip);
 	if (!ft_strcmp(mac[0], mal->d_maddr) && \
 		!ft_strcmp(ip[0], mal->d_ip))
 	{
@@ -37,14 +36,12 @@ int	recv_arp(t_malcolm *mal, char *buf)
 	t_arp		*arp;
 	ssize_t		ret;
 
-	//ntohs(arp->etype) == ETH_P_ARP &&
-
 	ret = recvfrom(mal->sockfd, buf, BUFSIZE, 0, mal->d_addr, &mal->d_addrlen);
 	arp = (t_arp *)(buf);
 	if (ret >= (ssize_t)(sizeof(t_arp)) && \
+		ntohs(arp->etype) == ETH_P_ARP && \
 		ntohs(arp->opcode) == ARPOP_REQUEST && \
 		check_addr(mal, arp))
 		return (1);
-	printf("Packet find but not attempt (%ld)\n", ret);
 	return (0);
 }
