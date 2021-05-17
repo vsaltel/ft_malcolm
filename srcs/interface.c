@@ -2,10 +2,10 @@
 
 struct ifaddrs	*get_interface(t_malcolm *mal)
 {
-    struct ifaddrs *ifap;
-    struct ifaddrs *ifa;
-    struct sockaddr_in *sa;
-    char *addr;
+	struct ifaddrs		*ifap;
+	struct ifaddrs		*ifa;
+	struct sockaddr_in	*sa;
+	char				*addr;
 
 	if (getifaddrs(&ifap))
 		return (NULL);
@@ -20,7 +20,7 @@ struct ifaddrs	*get_interface(t_malcolm *mal)
 			if (!ft_strncmp(addr, mal->s_ip, 3))
 			{
 				mal->ifa = ifa;
-				break;
+				break ;
 			}
 		}
 		ifa = ifa->ifa_next;

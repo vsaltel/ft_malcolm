@@ -2,7 +2,7 @@
 
 int	check_ip(char *ip)
 {
-	int i;
+	int	i;
 	int	n;
 	int	w;
 
