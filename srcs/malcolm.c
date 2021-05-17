@@ -1,5 +1,14 @@
 #include "malcolm.h"
 
+static void	print_input(t_malcolm *mal)
+{
+	printf("Input :\n");
+	printf("source mac address : %s\n"
+		"\tsource IP address : %s\n", mal->s_maddr, mal->s_ip)
+	printf("dest mac address : %s\n"
+		"\tdest IP address : %s\n", mal->d_maddr, mal->d_ip)
+}
+
 static int	rev_mal_info(t_malcolm *mal)
 {
 	mal->d_info = reverse_dns_info(mal->d_name, NULL, AF_INET, 0);
@@ -45,6 +54,8 @@ int	malcolm(t_malcolm *mal)
 
 	if (rev_mal_info(mal))
 		return (3);
+	if (mal->v)
+		print_input(mal);
 	mal->ifap = get_interface(mal);
 	if (!mal->ifap)
 		return (4);
