@@ -8,10 +8,14 @@ static int	rev_mal_info(t_malcolm *mal)
 	mal->d_addr = mal->d_info->ai_addr;
 	mal->d_addrlen = mal->d_info->ai_addrlen;
 	mal->d_ip = set_inetaddr(mal->d_info);
+	if (!mal->d_ip)
+		return (1);
 	mal->s_info = reverse_dns_info(mal->s_name, NULL, AF_INET, 0);
 	if (!mal->s_info)
 		return (1);
 	mal->s_ip = set_inetaddr(mal->s_info);
+	if (!mal->s_ip)
+		return (1);
 	return (0);
 }
 
