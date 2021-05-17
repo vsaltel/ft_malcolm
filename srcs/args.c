@@ -70,11 +70,11 @@ int	get_args(t_malcolm *mal, int ac, char **av)
 		return (2);
 	mal->d_addr = d_info->ai_addr;
 	mal->d_addrlen = d_info->ai_addrlen;
-	mal->d_ip = set_inetaddr(mal, d_info);
-	mal->info = get_addr_info(mal, mal->s_ip);
-	if (!mal->info)
+	mal->d_ip = set_inetaddr(mal, mal->d_info);
+	mal->s_info = get_addr_info(mal, mal->s_ip);
+	if (!mal->s_info)
 		return (2);
-	mal->s_ip = set_inetaddr(mal, s_info);
+	mal->s_ip = set_inetaddr(mal, mal->s_info);
 	/*
 	if (check_ip(mal->s_ip))
 		return (err_ret("ip address malformed", mal->s_ip, 1));
