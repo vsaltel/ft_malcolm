@@ -13,7 +13,7 @@
 
 # include <stdio.h>
 # include <signal.h>
-# include <netdb.h>
+//# include <netdb.h>
 # include <sys/types.h>
 # include <sys/socket.h>
 # include <arpa/inet.h>
@@ -23,9 +23,6 @@
 # include <ifaddrs.h>
 # include <netinet/if_ether.h>
 # include <netpacket/packet.h>
-
-# include <string.h>
-# include <errno.h>
 
 # include "libft.h"
 
@@ -43,7 +40,6 @@ typedef struct s_arp
 	uint8_t			sender_ip[IP_LEN];
 	uint8_t			target_mac[MAC_LEN];
 	uint8_t			target_ip[IP_LEN];
-//	uint8_t			padding[PADDING_LEN];
 }				t_arp;
 
 typedef struct s_pckt
