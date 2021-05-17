@@ -26,6 +26,8 @@ FILES	=	main.c				\
 			convert.c			\
 			send.c				\
 			recv.c				\
+			ip_utils.c			\
+			mac_utils.c			\
 			args_utils.c
 
 SRCS	=	$(addprefix $(SRCDIR)/, $(FILES))

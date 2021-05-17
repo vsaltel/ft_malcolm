@@ -4,9 +4,9 @@ static void	display_addr(char *smac, char *sip, char *dmac, char *dip)
 {
 	printf("An ARP request has been broadcast.\n");
 	printf("\tsource mac address : %s\n"
-			"\tsource IP address : %s\n", smac , sip);
+		"\tsource IP address : %s\n", smac, sip);
 	printf("\ttarget mac address : %s\n"
-			"\ttarget IP address : %s\n", dmac , dip);
+		"\ttarget IP address : %s\n", dmac, dip);
 }
 
 static int	check_addr(t_malcolm *mal, t_arp *arp)
@@ -24,10 +24,10 @@ static int	check_addr(t_malcolm *mal, t_arp *arp)
 		mac[1] = mac_strconv(arp->target_mac);
 		ip[1] = ip_strconv(arp->target_ip);
 		display_addr(mac[0], ip[0], mac[1], ip[1]);
-		ft_multifree(&mac[1], &ip[1], NULL);	
+		ft_multifree(&mac[1], &ip[1], NULL);
 		ret = 1;
 	}
-	ft_multifree(&mac[0], &ip[0], NULL);	
+	ft_multifree(&mac[0], &ip[0], NULL);
 	return (ret);
 }
 
