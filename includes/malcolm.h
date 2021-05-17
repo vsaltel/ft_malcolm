@@ -2,8 +2,8 @@
 # define MALCOLM_H
 
 # define BUFSIZE 1500
-# define PCKT_SIZE 56
-# define DEFAULT_TTL 255
+//# define PCKT_SIZE 56
+//# define DEFAULT_TTL 255
 # define IP_STR_SIZE 129
 # define PING_TTL 64
 # define RECV_TIMEOUT 1
@@ -18,7 +18,7 @@
 # include <sys/socket.h>
 # include <arpa/inet.h>
 # include <ifaddrs.h>
-//# include <netinet/if_ether.h>
+# include <netinet/if_ether.h>
 # include <netpacket/packet.h>
 
 # include "libft.h"
