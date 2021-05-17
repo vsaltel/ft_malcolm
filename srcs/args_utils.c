@@ -10,9 +10,9 @@ void	free_args(t_malcolm *mal)
 	free(mal->d_maddr);
 	if (mal->ifap)
 		freeifaddrs(mal->ifap);
-	if (mal->s_info
+	if (mal->s_info)
 		freeaddrinfo(mal->s_info);
-	if (mal->d_info
+	if (mal->d_info)
 		freeaddrinfo(mal->d_info);
 }
 
