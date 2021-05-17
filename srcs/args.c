@@ -64,7 +64,7 @@ int	get_args(t_malcolm *mal, int ac, char **av)
 	mal->s_maddr = ft_strupper(ft_strdup(av[i++]));
 	mal->d_name = ft_strdup(av[i++]);
 	mal->d_maddr = ft_strupper(ft_strdup(av[i++]));
-	if (i < argc)
+	if (i < ac)
 		return (err_ret("bad number of arguments", NULL, 1));
 	if (check_mac(mal->s_maddr))
 		return (err_ret("mac address malformed", mal->s_maddr, 1));
